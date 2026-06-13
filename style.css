@@ -126,6 +126,10 @@ nav {
   border: 1px solid var(--border);
 }
 .btn-ghost:hover { border-color: rgba(124,106,245,0.4); color: var(--text); }
+.btn-sm {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+}
 
 /* ── SECTIONS ── */
 section { padding: 6rem 3rem; }
@@ -230,6 +234,71 @@ section + section { border-top: 1px solid var(--border); }
 
 .about-links { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
 
+/* ── CERTIFICATIONS & AWARDS ── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.certs-column-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cert-item {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.cert-item:last-child { border-bottom: none; }
+
+.cert-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  margin-top: 0.1rem;
+}
+.cert-icon--cert  { background: rgba(124,106,245,0.12); color: var(--accent); }
+.cert-icon--award { background: rgba(79,168,232,0.12);  color: var(--accent-alt); }
+
+.cert-body { flex: 1; }
+
+.cert-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.cert-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.6rem;
+}
+
+.cert-desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
 /* ── CONTACT ── */
 .contact-inner { max-width: 560px; }
 .contact-inner p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
@@ -253,6 +322,7 @@ footer {
   .nav-links { gap: 1.25rem; }
   .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .certs-grid  { grid-template-columns: 1fr; gap: 2rem; }
   footer { flex-direction: column; gap: 0.5rem; text-align: center; }
 }
 

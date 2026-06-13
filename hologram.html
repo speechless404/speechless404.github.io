@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hologram · Rocket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #09090f;
+        --accent: #7c6af5;
+        --alt: #4fa8e8;
+        --text: #dcdaf5;
+        --muted: #7a7898;
+        --border: rgba(255, 255, 255, 0.08);
+        --mono: "DM Mono", monospace;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      /* ── VIEWER SHELL ── */
+      #viewer-wrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #060610;
+        cursor: grab;
+      }
+      #viewer-wrap:active {
+        cursor: grabbing;
+      }
+
+      #three-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Scan lines */
+      #viewer-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 2px,
+          rgba(0, 0, 0, 0.15) 2px,
+          rgba(0, 0, 0, 0.15) 4px
+        );
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* Corner brackets */
+      .bracket {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-color: var(--accent);
+        border-style: solid;
+        opacity: 0.5;
+        z-index: 11;
+      }
+      .bracket-tl {
+        top: 12px;
+        left: 12px;
+        border-width: 1px 0 0 1px;
+      }
+      .bracket-tr {
+        top: 12px;
+        right: 12px;
+        border-width: 1px 1px 0 0;
+      }
+      .bracket-bl {
+        bottom: 12px;
+        left: 12px;
+        border-width: 0 0 1px 1px;
+      }
+      .bracket-br {
+        bottom: 12px;
+        right: 12px;
+        border-width: 0 1px 1px 0;
+      }
+
+      /* HUD labels */
+      .hud {
+        position: absolute;
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(124, 106, 245, 0.45);
+        z-index: 12;
+        pointer-events: none;
+        user-select: none;
+      }
+      .hud-tl {
+        top: 16px;
+        left: 38px;
+      }
+      .hud-tr {
+        top: 16px;
+        right: 38px;
+      }
+      .hud-bl {
+        bottom: 16px;
+        left: 38px;
+      }
+      .hud-br {
+        bottom: 16px;
+        right: 38px;
+      }
+
+      /* Loading state */
+      #loading {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20;
+        background: rgba(6, 6, 16, 0.95);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        gap: 0.75rem;
+      }
+      #loading.hidden {
+        display: none;
+      }
+
+      /* Flicker */
+      @keyframes flicker {
+        0%,
+        94%,
+        100% {
+          opacity: 1;
+        }
+        95% {
+          opacity: 0.88;
+        }
+        97% {
+          opacity: 0.94;
+        }
+      }
+      #viewer-wrap {
+        animation: flicker 9s ease-in-out infinite;
+      }
+
+      /* Hint */
+      #drag-hint {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(124, 106, 245, 0.3);
+        z-index: 12;
+        pointer-events: none;
+        user-select: none;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewer-wrap">
+      <div class="bracket bracket-tl"></div>
+      <div class="bracket bracket-tr"></div>
+      <div class="bracket bracket-bl"></div>
+      <div class="bracket bracket-br"></div>
+
+      <div class="hud hud-tl" id="hud-model">loading…</div>
+      <div class="hud hud-tr">hologram · v1</div>
+      <div class="hud hud-bl" id="hud-verts"></div>
+      <div class="hud hud-br" id="hud-rot">rot 0°</div>
+
+      <canvas id="three-canvas"></canvas>
+
+      <div id="loading">⬡ &nbsp; initialising</div>
+      <div id="drag-hint">drag to rotate · scroll to zoom</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // ── SCENE ────────────────────────────────────────────────────
+      const canvas = document.getElementById("three-canvas");
+      const wrap = document.getElementById("viewer-wrap");
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+      camera.position.set(0, 0, 3);
+
+      // Lights
+      scene.add(new THREE.AmbientLight(0x4433ff, 0.6));
+      const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
+      point1.position.set(3, 3, 3);
+      scene.add(point1);
+      const point2 = new THREE.PointLight(0x4fa8e8, 1.5, 20);
+      point2.position.set(-3, -2, 2);
+      scene.add(point2);
+
+      // Material — hologram look, not editable by viewer
+      const holoMat = new THREE.MeshPhongMaterial({
+        color: 0x7c6af5,
+        emissive: 0x3a2fa0,
+        specular: 0xffffff,
+        shininess: 80,
+        transparent: true,
+        opacity: 0.82,
+        side: THREE.DoubleSide,
+      });
+
+      // Grid platform
+      scene.add(
+        Object.assign(new THREE.GridHelper(4, 20, 0x2a2060, 0x1a1440), {
+          position: { x: 0, y: -1.2, z: 0 },
+        }),
+      );
+
+      // Star field
+      const starGeo = new THREE.BufferGeometry();
+      const starArr = new Float32Array(600);
+      for (let i = 0; i < 600; i++) starArr[i] = (Math.random() - 0.5) * 14;
+      starGeo.setAttribute("position", new THREE.BufferAttribute(starArr, 3));
+      scene.add(
+        new THREE.Points(
+          starGeo,
+          new THREE.PointsMaterial({
+            color: 0x5544cc,
+            size: 0.025,
+            transparent: true,
+            opacity: 0.5,
+          }),
+        ),
+      );
+
+      // ── RESIZE ───────────────────────────────────────────────────
+      function onResize() {
+        const w = wrap.clientWidth,
+          h = wrap.clientHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener("resize", onResize);
+      onResize();
+
+      // ── MOUSE ORBIT (rotate + zoom only — no file interaction) ───
+      let isDragging = false,
+        lastX = 0,
+        lastY = 0;
+      let zoom = 3;
+      let mesh = null;
+
+      wrap.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+      });
+      window.addEventListener("mouseup", () => (isDragging = false));
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging || !mesh) return;
+        mesh.rotation.y += (e.clientX - lastX) * 0.008;
+        mesh.rotation.x += (e.clientY - lastY) * 0.008;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        document.getElementById("hud-rot").textContent =
+          "rot " +
+          ((((mesh.rotation.y * 180) / Math.PI) | ((0 % 360) + 360)) % 360) +
+          "°";
+      });
+      wrap.addEventListener(
+        "wheel",
+        (e) => {
+          e.preventDefault();
+          zoom = Math.max(0.8, Math.min(8, zoom + e.deltaY * 0.004));
+          camera.position.z = zoom;
+        },
+        { passive: false },
+      );
+
+      // Touch
+      let lastTX = 0,
+        lastTY = 0;
+      wrap.addEventListener("touchstart", (e) => {
+        lastTX = e.touches[0].clientX;
+        lastTY = e.touches[0].clientY;
+      });
+      wrap.addEventListener(
+        "touchmove",
+        (e) => {
+          e.preventDefault();
+          if (!mesh) return;
+          mesh.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
+          mesh.rotation.x += (e.touches[0].clientY - lastTY) * 0.01;
+          lastTX = e.touches[0].clientX;
+          lastTY = e.touches[0].clientY;
+        },
+        { passive: false },
+      );
+
+      // ── RENDER LOOP ───────────────────────────────────────────────
+      let t = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        t += 0.016;
+        if (mesh) mesh.rotation.y += 0.004; // slow auto-spin
+        point1.intensity = 2.0 + Math.sin(t * 1.4) * 0.6;
+        point2.intensity = 1.2 + Math.cos(t * 1.1) * 0.4;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // ── STL PARSERS ───────────────────────────────────────────────
+      function parseSTLBinary(buf) {
+        const dv = new DataView(buf);
+        const count = dv.getUint32(80, true);
+        const pos = new Float32Array(count * 9);
+        let off = 84,
+          pi = 0;
+        for (let i = 0; i < count; i++) {
+          off += 12;
+          for (let v = 0; v < 3; v++) {
+            pos[pi++] = dv.getFloat32(off, true);
+            pos[pi++] = dv.getFloat32(off + 4, true);
+            pos[pi++] = dv.getFloat32(off + 8, true);
+            off += 12;
+          }
+          off += 2;
+        }
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+        geo.computeVertexNormals();
+        return geo;
+      }
+
+      function parseSTLASCII(text) {
+        const verts = [],
+          re = /vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g;
+        let m;
+        while ((m = re.exec(text)) !== null)
+          verts.push(parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]));
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute(
+          "position",
+          new THREE.BufferAttribute(new Float32Array(verts), 3),
+        );
+        geo.computeVertexNormals();
+        return geo;
+      }
+
+      function buildMesh(buf) {
+        const dv = new DataView(buf);
+        const peek = new TextDecoder().decode(buf.slice(0, 5));
+        const geo =
+          peek === "solid" &&
+          dv.getUint32(80, true) * 50 + 84 !== buf.byteLength
+            ? parseSTLASCII(new TextDecoder().decode(buf))
+            : parseSTLBinary(buf);
+
+        geo.center();
+        geo.computeBoundingBox();
+        const size = new THREE.Vector3();
+        geo.boundingBox.getSize(size);
+        const scale = 2.0 / Math.max(size.x, size.y, size.z);
+
+        mesh = new THREE.Mesh(geo, holoMat);
+        mesh.scale.setScalar(scale);
+        mesh.rotation.x = -Math.PI / 12;
+        scene.add(mesh);
+
+        const vCount = geo.attributes.position.count;
+        document.getElementById("hud-verts").textContent =
+          vCount.toLocaleString() + " verts";
+        document.getElementById("loading").classList.add("hidden");
+      }
+
+      // ── AUTO-LOAD FROM REPO ───────────────────────────────────────
+      const MODEL_PATH = "STL/models/rocket.stl";
+
+      fetch(MODEL_PATH)
+        .then((res) => {
+          if (!res.ok) throw new Error("File not found: " + MODEL_PATH);
+          return res.arrayBuffer();
+        })
+        .then((buf) => {
+          const filename = MODEL_PATH.split("/").pop();
+          document.getElementById("hud-model").textContent = filename;
+          buildMesh(buf);
+        })
+        .catch((err) => {
+          document.getElementById("loading").textContent = "⚠ model not found";
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>
