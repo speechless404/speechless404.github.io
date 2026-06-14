@@ -32,16 +32,15 @@
       body {
         width: 100%;
         height: 100%;
-        background: var(--bg);
+        background: transparent;
         overflow: hidden;
       }
 
-      /* ── VIEWER SHELL ── */
       #viewer-wrap {
         position: relative;
         width: 100%;
         height: 100%;
-        background: #060610;
+        background: transparent;
         cursor: grab;
       }
       #viewer-wrap:active {
@@ -55,80 +54,15 @@
         height: 100% !important;
       }
 
-      /* Scan lines */
+      /* Scan lines, brackets, and HUD all hidden for transparent mode */
       #viewer-wrap::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          to bottom,
-          transparent 0px,
-          transparent 2px,
-          rgba(0, 0, 0, 0.15) 2px,
-          rgba(0, 0, 0, 0.15) 4px
-        );
-        pointer-events: none;
-        z-index: 10;
+        display: none;
       }
-
-      /* Corner brackets */
       .bracket {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-color: var(--accent);
-        border-style: solid;
-        opacity: 0.5;
-        z-index: 11;
+        display: none;
       }
-      .bracket-tl {
-        top: 12px;
-        left: 12px;
-        border-width: 1px 0 0 1px;
-      }
-      .bracket-tr {
-        top: 12px;
-        right: 12px;
-        border-width: 1px 1px 0 0;
-      }
-      .bracket-bl {
-        bottom: 12px;
-        left: 12px;
-        border-width: 0 0 1px 1px;
-      }
-      .bracket-br {
-        bottom: 12px;
-        right: 12px;
-        border-width: 0 1px 1px 0;
-      }
-
-      /* HUD labels */
       .hud {
-        position: absolute;
-        font-family: var(--mono);
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba(124, 106, 245, 0.45);
-        z-index: 12;
-        pointer-events: none;
-        user-select: none;
-      }
-      .hud-tl {
-        top: 16px;
-        left: 38px;
-      }
-      .hud-tr {
-        top: 16px;
-        right: 38px;
-      }
-      .hud-bl {
-        bottom: 16px;
-        left: 38px;
-      }
-      .hud-br {
-        bottom: 16px;
-        right: 38px;
+        display: none;
       }
 
       /* Loading state */
@@ -169,7 +103,6 @@
         animation: flicker 9s ease-in-out infinite;
       }
 
-      /* Hint */
       #drag-hint {
         position: absolute;
         bottom: 32px;
@@ -200,29 +133,28 @@
       <div class="hud hud-br" id="hud-rot">rot 0°</div>
 
       <canvas id="three-canvas"></canvas>
-
       <div id="loading">⬡ &nbsp; initialising</div>
       <div id="drag-hint">drag to rotate · scroll to zoom</div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-      // ── SCENE ────────────────────────────────────────────────────
+      // ── SCENE ──────────────────────────────────────────────────────
       const canvas = document.getElementById("three-canvas");
       const wrap = document.getElementById("viewer-wrap");
+
       const renderer = new THREE.WebGLRenderer({
         canvas,
         antialias: true,
         alpha: true,
       });
       renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setClearColor(0x000000, 0);
+      renderer.setClearColor(0x000000, 0); // fully transparent clear
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
-      camera.position.set(0, 0, 3);
+      camera.position.set(0, 0, 4);
 
-      // Lights
       scene.add(new THREE.AmbientLight(0x4433ff, 0.6));
       const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
       point1.position.set(3, 3, 3);
@@ -231,7 +163,8 @@
       point2.position.set(-3, -2, 2);
       scene.add(point2);
 
-      // Material — hologram look, not editable by viewer
+      // No grid or star field — background shows through from the parent page
+
       const holoMat = new THREE.MeshPhongMaterial({
         color: 0x7c6af5,
         emissive: 0x3a2fa0,
@@ -242,31 +175,7 @@
         side: THREE.DoubleSide,
       });
 
-      // Grid platform
-      scene.add(
-        Object.assign(new THREE.GridHelper(4, 20, 0x2a2060, 0x1a1440), {
-          position: { x: 0, y: -1.2, z: 0 },
-        }),
-      );
-
-      // Star field
-      const starGeo = new THREE.BufferGeometry();
-      const starArr = new Float32Array(600);
-      for (let i = 0; i < 600; i++) starArr[i] = (Math.random() - 0.5) * 14;
-      starGeo.setAttribute("position", new THREE.BufferAttribute(starArr, 3));
-      scene.add(
-        new THREE.Points(
-          starGeo,
-          new THREE.PointsMaterial({
-            color: 0x5544cc,
-            size: 0.025,
-            transparent: true,
-            opacity: 0.5,
-          }),
-        ),
-      );
-
-      // ── RESIZE ───────────────────────────────────────────────────
+      // ── RESIZE ────────────────────────────────────────────────────
       function onResize() {
         const w = wrap.clientWidth,
           h = wrap.clientHeight;
@@ -277,12 +186,12 @@
       window.addEventListener("resize", onResize);
       onResize();
 
-      // ── MOUSE ORBIT (rotate + zoom only — no file interaction) ───
+      // ── MOUSE ORBIT ───────────────────────────────────────────────
       let isDragging = false,
         lastX = 0,
-        lastY = 0;
-      let zoom = 3;
-      let mesh = null;
+        lastY = 0,
+        zoom = 4,
+        mesh = null;
 
       wrap.addEventListener("mousedown", (e) => {
         isDragging = true;
@@ -291,21 +200,16 @@
       });
       window.addEventListener("mouseup", () => (isDragging = false));
       window.addEventListener("mousemove", (e) => {
-        if (!isDragging || !mesh) return;
-        mesh.rotation.y += (e.clientX - lastX) * 0.008;
-        mesh.rotation.x += (e.clientY - lastY) * 0.008;
+        if (!isDragging || !pivot) return;
+        pivot.rotation.y += (e.clientX - lastX) * 0.008;
         lastX = e.clientX;
         lastY = e.clientY;
-        document.getElementById("hud-rot").textContent =
-          "rot " +
-          ((((mesh.rotation.y * 180) / Math.PI) | ((0 % 360) + 360)) % 360) +
-          "°";
       });
       wrap.addEventListener(
         "wheel",
         (e) => {
           e.preventDefault();
-          zoom = Math.max(0.8, Math.min(8, zoom + e.deltaY * 0.004));
+          zoom = Math.max(1.5, Math.min(10, zoom + e.deltaY * 0.004));
           camera.position.z = zoom;
         },
         { passive: false },
@@ -322,9 +226,8 @@
         "touchmove",
         (e) => {
           e.preventDefault();
-          if (!mesh) return;
-          mesh.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
-          mesh.rotation.x += (e.touches[0].clientY - lastTY) * 0.01;
+          if (!pivot) return;
+          pivot.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
           lastTX = e.touches[0].clientX;
           lastTY = e.touches[0].clientY;
         },
@@ -336,7 +239,7 @@
       function animate() {
         requestAnimationFrame(animate);
         t += 0.016;
-        if (mesh) mesh.rotation.y += 0.004; // slow auto-spin
+        if (pivot) pivot.rotation.y += 0.004; // spin around world vertical
         point1.intensity = 2.0 + Math.sin(t * 1.4) * 0.6;
         point2.intensity = 1.2 + Math.cos(t * 1.1) * 0.4;
         renderer.render(scene, camera);
@@ -381,9 +284,13 @@
         return geo;
       }
 
+      // pivot is what spins around the world Y axis
+      // mesh sits inside pivot, tilted 30° from vertical
+      let pivot = null;
+
       function buildMesh(buf) {
-        const dv = new DataView(buf);
         const peek = new TextDecoder().decode(buf.slice(0, 5));
+        const dv = new DataView(buf);
         const geo =
           peek === "solid" &&
           dv.getUint32(80, true) * 50 + 84 !== buf.byteLength
@@ -394,35 +301,47 @@
         geo.computeBoundingBox();
         const size = new THREE.Vector3();
         geo.boundingBox.getSize(size);
-        const scale = 2.0 / Math.max(size.x, size.y, size.z);
+        const scale = 1.6 / Math.max(size.x, size.y, size.z);
 
         mesh = new THREE.Mesh(geo, holoMat);
         mesh.scale.setScalar(scale);
-        mesh.rotation.x = -Math.PI / 12;
-        scene.add(mesh);
 
-        const vCount = geo.attributes.position.count;
+        // Tilt the mesh so the rocket's long axis is 30° from vertical.
+        // STL long axis is typically X or Z — this tilts around Z so the
+        // nose points up-and-slightly-forward.
+        mesh.rotation.z = THREE.MathUtils.degToRad(30);
+
+        // Wrap in a pivot group that rotates around Y (vertical)
+        pivot = new THREE.Group();
+        pivot.add(mesh);
+        scene.add(pivot);
+
         document.getElementById("hud-verts").textContent =
-          vCount.toLocaleString() + " verts";
+          geo.attributes.position.count.toLocaleString() + " verts";
         document.getElementById("loading").classList.add("hidden");
       }
 
-      // ── AUTO-LOAD FROM REPO ───────────────────────────────────────
-      const MODEL_PATH = "STL/models/rocket.stl";
+      // ── MODEL PATH ────────────────────────────────────────────────
+      const MODEL_PATH = "STL/L1_Rocket.STL";
 
       fetch(MODEL_PATH)
         .then((res) => {
-          if (!res.ok) throw new Error("File not found: " + MODEL_PATH);
+          if (!res.ok)
+            throw new Error("HTTP " + res.status + " loading " + MODEL_PATH);
           return res.arrayBuffer();
         })
         .then((buf) => {
-          const filename = MODEL_PATH.split("/").pop();
-          document.getElementById("hud-model").textContent = filename;
+          console.log(
+            "STL loaded:",
+            (buf.byteLength / 1024 / 1024).toFixed(2) + " MB",
+          );
+          document.getElementById("hud-model").textContent =
+            MODEL_PATH.split("/").pop();
           buildMesh(buf);
         })
         .catch((err) => {
-          document.getElementById("loading").textContent = "⚠ model not found";
-          console.error(err);
+          document.getElementById("loading").textContent = "⚠ " + err.message;
+          console.error("Hologram error:", err);
         });
     </script>
   </body>

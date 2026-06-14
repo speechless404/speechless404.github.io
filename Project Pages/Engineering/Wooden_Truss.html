@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ▶ CHANGE: update to match your project name -->
+    <title>Project Name — Mingyuan Chen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Path back to root style.css — adjust if this file is deeper than one folder -->
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      /* ── PROJECT PAGE EXTRAS ── */
+
+      /* Back link */
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .back-link:hover {
+        color: var(--accent);
+      }
+
+      /* Hero: project title block */
+      .project-hero {
+        padding: 9rem 3rem 0;
+        max-width: 900px;
+      }
+      .project-hero .hero-eyebrow {
+        margin-bottom: 1rem;
+      }
+      .project-title-large {
+        font-size: clamp(2.4rem, 6vw, 5rem);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+        margin-bottom: 1.5rem;
+      }
+      .project-subtitle {
+        font-size: 1.05rem;
+        color: var(--muted);
+        max-width: 560px;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      /* Meta pills row */
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 3rem;
+      }
+      .meta-pill {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.8rem;
+        border-radius: 3px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .meta-pill.accent {
+        border-color: rgba(124, 106, 245, 0.4);
+        color: var(--accent);
+      }
+
+      /* Hologram embed */
+      .hologram-wrap {
+        width: 100%;
+        aspect-ratio: 16/7;
+        border: 1px solid rgba(124, 106, 245, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 0 0 5rem;
+      }
+      .hologram-wrap iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      /* Content body */
+      .project-body {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 4rem;
+        align-items: start;
+        padding: 0 3rem 6rem;
+        max-width: 1100px;
+      }
+
+      /* Prose */
+      .project-prose h2 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        margin: 2.5rem 0 1rem;
+      }
+      .project-prose h2:first-child {
+        margin-top: 0;
+      }
+      .project-prose p {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.85;
+        margin-bottom: 1rem;
+      }
+      .project-prose ul {
+        padding-left: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .project-prose li {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 0.3rem;
+      }
+
+      /* Image gallery */
+      .project-gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        margin: 2rem 0;
+      }
+      .gallery-img {
+        aspect-ratio: 4/3;
+        background: var(--surface);
+        overflow: hidden;
+      }
+      .gallery-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+      .gallery-img:hover img {
+        transform: scale(1.04);
+      }
+      /* Placeholder for images not yet added */
+      .gallery-img.placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: var(--accent-dim);
+      }
+
+      /* Sidebar */
+      .project-sidebar {
+        position: sticky;
+        top: 6rem;
+      }
+
+      .sidebar-block {
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        background: var(--surface);
+        border-radius: 4px;
+      }
+      .sidebar-label {
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+      .sidebar-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.85rem;
+      }
+      .sidebar-row:last-child {
+        border-bottom: none;
+      }
+      .sidebar-row span:first-child {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      .sidebar-row span:last-child {
+        color: var(--text);
+        font-size: 0.85rem;
+      }
+
+      .sidebar-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .sidebar-links .btn {
+        text-align: center;
+      }
+
+      /* Next/prev nav */
+      .project-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 3rem;
+        border-top: 1px solid var(--border);
+      }
+      .project-nav a {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .project-nav a:hover {
+        color: var(--accent);
+      }
+
+      /* Responsive */
+      @media (max-width: 760px) {
+        .project-hero,
+        .project-body {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .project-body {
+          grid-template-columns: 1fr;
+        }
+        .project-sidebar {
+          position: static;
+        }
+        .hologram-wrap {
+          aspect-ratio: 4/3;
+        }
+        .project-gallery {
+          grid-template-columns: 1fr;
+        }
+        .project-nav {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV (same as main site) -->
+    <nav>
+      <span class="nav-logo">mingyuanchen</span>
+      <ul class="nav-links">
+        <li><a href="../../index.html#projects">work</a></li>
+        <li><a href="../../index.html#about">about</a></li>
+        <li><a href="../../index.html#certs">awards</a></li>
+        <li><a href="../../index.html#contact">contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <div class="project-hero">
+      <a href="../../index.html#projects" class="back-link">← all projects</a>
+
+      <div style="height: 2rem"></div>
+
+      <!-- ▶ CHANGE: update tag, title, and subtitle -->
+      <p class="hero-eyebrow">engineering</p>
+      <h1 class="project-title-large">
+        Terrapin Rockets<br />Two-Stage Vehicle
+      </h1>
+      <p class="project-subtitle">
+        A one-sentence hook that makes someone want to keep reading. What's the
+        most interesting thing about this project?
+      </p>
+
+      <!-- ▶ CHANGE: update pills to match your project's details -->
+      <div class="project-meta">
+        <span class="meta-pill accent">engineering</span>
+        <span class="meta-pill">UMD Terrapin Rockets</span>
+        <span class="meta-pill">2024 – present</span>
+        <span class="meta-pill">Fusion 360</span>
+        <span class="meta-pill">ANSYS</span>
+      </div>
+    </div>
+
+    <!-- ── HOLOGRAM ── -->
+    <!-- ▶ CHANGE: update src to point to the right hologram file for this project -->
+    <!-- If you have multiple projects with different STLs, make a copy of hologram.html
+       for each one (e.g. hologram-rocket.html, hologram-airbrake.html) and change
+       the MODEL_PATH inside each copy. Then update the src below. -->
+    <!-- To remove the hologram entirely, delete this whole section -->
+    <div style="padding: 0 3rem">
+      <div class="hologram-wrap">
+        <iframe src="../hologram.html" title="3D model viewer"></iframe>
+      </div>
+    </div>
+
+    <!-- ── BODY ── -->
+    <div class="project-body">
+      <!-- LEFT: prose + images -->
+      <div class="project-prose">
+        <h2>Overview</h2>
+        <p>
+          Write 2–3 sentences explaining the project at a high level. What is
+          it, what does it do, and why does it exist? Assume the reader has no
+          context.
+        </p>
+
+        <h2>My Role</h2>
+        <p>
+          Describe specifically what you contributed. Avoid vague language like
+          "I helped with" — instead say "I designed the fin geometry in Fusion
+          360 and ran stress simulations in ANSYS to validate the load cases."
+        </p>
+
+        <h2>Technical Details</h2>
+        <p>
+          This is where you can go deeper. Talk about the engineering decisions,
+          tradeoffs you made, problems you hit, and how you solved them. Use
+          bullet points if you're listing specs:
+        </p>
+        <ul>
+          <li>Apogee target: X ft AGL</li>
+          <li>Airframe material: fiberglass / carbon fiber</li>
+          <li>Motor class: L / M</li>
+          <li>Recovery: dual-deploy with electronic deployment</li>
+        </ul>
+
+        <h2>Gallery</h2>
+        <!-- ▶ CHANGE: replace placeholder divs with real images.
+           Pattern: <img src="../../assets/images/project-name/photo.jpg" alt="description"> -->
+        <div class="project-gallery">
+          <div class="gallery-img placeholder">[ image 1 ]</div>
+          <div class="gallery-img placeholder">[ image 2 ]</div>
+          <div class="gallery-img placeholder">[ image 3 ]</div>
+          <div class="gallery-img placeholder">[ image 4 ]</div>
+        </div>
+
+        <h2>Outcome</h2>
+        <p>
+          What happened? Did the rocket fly? What did you learn? Any future work
+          planned? Close the loop so the reader leaves with a sense of
+          resolution.
+        </p>
+      </div>
+
+      <!-- RIGHT: sidebar -->
+      <aside class="project-sidebar">
+        <!-- Quick facts -->
+        <div class="sidebar-block">
+          <p class="sidebar-label">project info</p>
+          <!-- ▶ CHANGE: update each row -->
+          <div class="sidebar-row">
+            <span>type</span>
+            <span>Engineering</span>
+          </div>
+          <div class="sidebar-row">
+            <span>team</span>
+            <span>Terrapin Rockets</span>
+          </div>
+          <div class="sidebar-row">
+            <span>year</span>
+            <span>2024</span>
+          </div>
+          <div class="sidebar-row">
+            <span>status</span>
+            <span>In progress</span>
+          </div>
+          <div class="sidebar-row">
+            <span>tools</span>
+            <span>Fusion 360, ANSYS</span>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="sidebar-block">
+          <p class="sidebar-label">links</p>
+          <div class="sidebar-links">
+            <!-- ▶ CHANGE: add/remove buttons as needed. Delete any that don't apply. -->
+            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
+              >github repo</a
+            >
+            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
+              >report / paper</a
+            >
+            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
+              >club website</a
+            >
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ── PREV / NEXT ── -->
+    <!-- ▶ CHANGE: update hrefs to adjacent project pages -->
+    <div class="project-nav">
+      <a href="#">← previous project</a>
+      <a href="../../index.html#projects">all projects</a>
+      <a href="#">next project →</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 Mingyuan Chen</span>
+      <span>built with github pages</span>
+    </footer>
+  </body>
+</html>

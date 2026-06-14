@@ -329,3 +329,31 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* ── HERO HOLOGRAM ── */
+
+/* The Three.js canvas sits absolute inside the hero, behind the text */
+#holo-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1;
+  pointer-events: none; /* pass clicks/scroll through to page */
+}
+
+/* Re-enable interaction when hovering the hero so users can spin */
+.hero:hover #holo-canvas {
+  pointer-events: auto;
+}
+
+/* Text stays above the canvas */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  #holo-canvas { opacity: 0.45; }
+}
