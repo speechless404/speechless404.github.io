@@ -339,12 +339,7 @@ footer {
   width: 100% !important;
   height: 100% !important;
   z-index: 1;
-  pointer-events: none; /* pass clicks/scroll through to page */
-}
-
-/* Re-enable interaction when hovering the hero so users can spin */
-.hero:hover #holo-canvas {
-  pointer-events: auto;
+  cursor: default;
 }
 
 /* Text stays above the canvas */
@@ -352,6 +347,7 @@ footer {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
+  pointer-events: auto; /* make sure text/buttons are always clickable */
 }
 
 @media (max-width: 900px) {
