@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="../../style.css" />
     <style>
-      /* ── PROJECT PAGE EXTRAS ── */
+      /* ── PROJECT PAGE EXTRAS (CSS) ── */
       .back-link {
         display: inline-flex;
         align-items: center;
@@ -416,9 +416,8 @@
       <div class="project-meta">
         <span class="meta-pill accent">engineering</span>
         <span class="meta-pill">UMD Terrapin Rockets</span>
-        <span class="meta-pill">2024 – present</span>
-        <span class="meta-pill">Fusion 360</span>
-        <span class="meta-pill">OpenRocket</span>
+        <span class="meta-pill">Two-Stage Subteam</span>
+        <span class="meta-pill">2025 – present</span>
       </div>
     </div>
 
@@ -522,30 +521,35 @@
           <div class="sidebar-row">
             <span>team</span><span>Terrapin Rockets</span>
           </div>
-          <div class="sidebar-row"><span>year</span><span>2024</span></div>
+          <div class="sidebar-row">
+            <span>subteam</span><span>Two-Stage</span>
+          </div>
+          <div class="sidebar-row"><span>start</span><span>2024</span></div>
           <div class="sidebar-row">
             <span>status</span><span>In progress</span>
-          </div>
-          <div class="sidebar-row">
-            <span>tools</span><span>Fusion 360</span>
           </div>
         </div>
 
         <div class="sidebar-block">
-          <p class="sidebar-label">links</p>
-          <div class="sidebar-links">
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >github repo</a
-            >
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >report / paper</a
-            >
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >club website</a
-            >
-          </div>
+          <p class="sidebar-label">tools</p>
+          <div class="sidebar-row"><span>SOLIDWORKS</span></div>
+          <div class="sidebar-row"><span>OpenRocket</span></div>
+          <div class="sidebar-row"><span>Laser Cutter</span></div>
+          <div class="sidebar-row"><span>3D Printing</span></div>
         </div>
       </aside>
+    </div>
+
+    <!-- ── LINKS (bottom of page) ── -->
+    <div style="padding: 3rem; border-top: 1px solid var(--border)">
+      <p class="section-label">links</p>
+      <div
+        style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem"
+      >
+        <a href="#" class="btn btn-ghost" target="_blank">github repo</a>
+        <a href="#" class="btn btn-ghost" target="_blank">report / paper</a>
+        <a href="#" class="btn btn-ghost" target="_blank">club website</a>
+      </div>
     </div>
 
     <!-- ── PREV / NEXT ── -->
@@ -560,7 +564,7 @@
       <span>built with github pages</span>
     </footer>
 
-    <!-- THREE.JS HOLOGRAM — same system as homepage -->
+    <!-- THREE.JS HOLOGRAM -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
       (function () {
@@ -579,7 +583,6 @@
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
         camera.position.set(0, 0, 4);
 
-        // Lights
         scene.add(new THREE.AmbientLight(0x4433ff, 0.5));
         const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
         point1.position.set(3, 3, 3);
@@ -588,12 +591,10 @@
         point2.position.set(-3, -2, 2);
         scene.add(point2);
 
-        // Grid platform
         const grid = new THREE.GridHelper(6, 24, 0x2a2060, 0x1a1440);
         grid.position.y = -1.4;
         scene.add(grid);
 
-        // Star field
         const starGeo = new THREE.BufferGeometry();
         const starArr = new Float32Array(900);
         for (let i = 0; i < 900; i++) starArr[i] = (Math.random() - 0.5) * 18;
@@ -620,7 +621,6 @@
           side: THREE.DoubleSide,
         });
 
-        // Resize
         function onResize() {
           const w = strip.clientWidth,
             h = strip.clientHeight;
@@ -631,23 +631,57 @@
         window.addEventListener("resize", onResize);
         onResize();
 
-        // ── INTERACTION: drag + scroll zoom ──
-        let isDragging = false,
-          lastX = 0,
-          lastY = 0,
-          zoom = 4;
+        // ── STATE ──────────────────────────────────────────────────
         let pivot = null;
+        let isDragging = false;
+        let lastX = 0,
+          lastY = 0;
+        let zoom = 4;
 
+        // Auto-spin / pause / snap-back
+        let autoSpin = true; // spinning?
+        let idleTimer = null; // timeout handle
+        let isSnapping = false; // currently snapping back?
+        const IDLE_DELAY = 2500; // ms after release before snap starts
+        const SNAP_SPEED = 0.06; // lerp factor per frame (0–1, higher = faster)
+
+        // Returns true if clientX is in the middle third of the strip
+        function inMiddleThird(clientX) {
+          const rect = strip.getBoundingClientRect();
+          const rel = (clientX - rect.left) / rect.width;
+          return rel >= 0.333 && rel <= 0.667;
+        }
+
+        // Called when the user stops interacting — start idle timer
+        function startIdleTimer() {
+          clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => {
+            isSnapping = true; // render loop will lerp back to origin
+          }, IDLE_DELAY);
+        }
+
+        // ── MOUSE ──────────────────────────────────────────────────
         strip.addEventListener("mousedown", (e) => {
+          clearTimeout(idleTimer);
+          isSnapping = false;
+          autoSpin = false;
           isDragging = true;
           lastX = e.clientX;
           lastY = e.clientY;
+          strip.style.cursor = "grabbing";
         });
-        window.addEventListener("mouseup", () => (isDragging = false));
+
+        window.addEventListener("mouseup", () => {
+          if (!isDragging) return;
+          isDragging = false;
+          strip.style.cursor = "grab";
+          startIdleTimer();
+        });
+
         window.addEventListener("mousemove", (e) => {
           if (!isDragging || !pivot) return;
           pivot.rotation.y += (e.clientX - lastX) * 0.008;
-          pivot.rotation.x += (e.clientY - lastY) * 0.004; // slight tilt on Y drag
+          pivot.rotation.x += (e.clientY - lastY) * 0.004;
           lastX = e.clientX;
           lastY = e.clientY;
           const deg =
@@ -656,10 +690,16 @@
             "rot " + Math.round(deg) + "°";
         });
 
-        // Scroll to zoom
-        strip.addEventListener(
+        // Cursor hint
+        strip.addEventListener("mousemove", (e) => {
+          if (!isDragging) strip.style.cursor = "grab";
+        });
+
+        // ── SCROLL: only zoom when mouse is in middle third ────────
+        window.addEventListener(
           "wheel",
           (e) => {
+            if (!inMiddleThird(e.clientX)) return; // let page scroll normally
             e.preventDefault();
             zoom = Math.max(1.5, Math.min(9, zoom + e.deltaY * 0.004));
             camera.position.z = zoom;
@@ -667,10 +707,13 @@
           { passive: false },
         );
 
-        // Touch
+        // ── TOUCH ──────────────────────────────────────────────────
         let lastTX = 0,
           lastTY = 0;
         strip.addEventListener("touchstart", (e) => {
+          clearTimeout(idleTimer);
+          isSnapping = false;
+          autoSpin = false;
           lastTX = e.touches[0].clientX;
           lastTY = e.touches[0].clientY;
         });
@@ -681,12 +724,12 @@
             if (!pivot) return;
             pivot.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
             lastTX = e.touches[0].clientX;
-            lastTY = e.touches[0].clientY;
           },
           { passive: false },
         );
+        strip.addEventListener("touchend", () => startIdleTimer());
 
-        // STL parsers
+        // ── STL PARSERS ────────────────────────────────────────────
         function parseSTLBinary(buf) {
           const dv = new DataView(buf);
           const count = dv.getUint32(80, true);
@@ -741,7 +784,7 @@
 
           const mesh = new THREE.Mesh(geo, holoMat);
           mesh.scale.setScalar(scale);
-          mesh.rotation.z = THREE.MathUtils.degToRad(-30); // nose up
+          mesh.rotation.z = THREE.MathUtils.degToRad(-30);
 
           pivot = new THREE.Group();
           pivot.add(mesh);
@@ -751,20 +794,42 @@
             geo.attributes.position.count.toLocaleString() + " verts";
         }
 
-        // Render loop
+        // ── RENDER LOOP ────────────────────────────────────────────
         let t = 0;
         function animate() {
           requestAnimationFrame(animate);
           t += 0.016;
-          if (pivot) pivot.rotation.y += 0.004;
+
+          if (pivot) {
+            if (isSnapping) {
+              // Lerp X back to 0, keep Y spinning from wherever it landed
+              pivot.rotation.x = THREE.MathUtils.lerp(
+                pivot.rotation.x,
+                0,
+                SNAP_SPEED,
+              );
+              // Once X is close enough to 0, snap is done — resume auto-spin
+              if (Math.abs(pivot.rotation.x) < 0.001) {
+                pivot.rotation.x = 0;
+                isSnapping = false;
+                autoSpin = true;
+              }
+            } else if (autoSpin) {
+              pivot.rotation.y += 0.004;
+            }
+
+            const deg =
+              ((((pivot.rotation.y * 180) / Math.PI) % 360) + 360) % 360;
+            document.getElementById("holo-rot").textContent =
+              "rot " + Math.round(deg) + "°";
+          }
+
           point1.intensity = 2.0 + Math.sin(t * 1.4) * 0.6;
           point2.intensity = 1.2 + Math.cos(t * 1.1) * 0.4;
           renderer.render(scene, camera);
         }
         animate();
 
-        // ▶ Update this path to match your STL location relative to THIS file
-        // This file is in Project Pages/Engineering/ so the STL is two levels up
         fetch("../../STL/L1_Rocket.STL")
           .then((res) => {
             if (!res.ok) throw new Error("HTTP " + res.status);
