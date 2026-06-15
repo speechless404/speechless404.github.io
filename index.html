@@ -29,10 +29,7 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
-      <!-- HOLOGRAM: three.js canvas sits directly in the hero, no iframe -->
       <canvas id="holo-canvas"></canvas>
-
-      <!-- Text sits on top of the hologram -->
       <div class="hero-inner">
         <p class="hero-eyebrow">engineer · artist · builder</p>
         <h1 class="hero-name">Mingyuan<br />Chen</h1>
@@ -71,7 +68,7 @@
 
       <div class="project-grid">
         <!-- PROJECT 1 -->
-        <a href="Project_Pages/Engineering/L1_Rocket.html" class="project-card">
+        <a href="Project Pages/Engineering/L1_Rocket.html" class="project-card">
           <p class="project-tag">engineering</p>
           <h3 class="project-title">L1 Rocket</h3>
           <p class="project-desc">
@@ -83,7 +80,7 @@
 
         <!-- PROJECT 2 -->
         <a
-          href="Project_Pages/Engineering/Seed_Planting_OTV.html"
+          href="Project Pages/Engineering/Seed_Planting_OTV.html"
           class="project-card"
         >
           <p class="project-tag">engineering</p>
@@ -97,7 +94,7 @@
 
         <!-- PROJECT 3 -->
         <a
-          href="Project_Pages/Engineering/Limit_Switch_Holder.html"
+          href="Project Pages/Engineering/Limit_Switch_Holder.html"
           class="project-card"
         >
           <p class="project-tag">engineering</p>
@@ -111,7 +108,7 @@
 
         <!-- PROJECT 4 -->
         <a
-          href="Project_Pages/Engineering/Wooden_Truss.html"
+          href="Project Pages/Engineering/Wooden_Truss.html"
           class="project-card"
         >
           <p class="project-tag">engineering</p>
@@ -124,7 +121,7 @@
 
         <!-- PROJECT 5 -->
         <a
-          href="Project_Pages/Engineering/Suspension_System.html"
+          href="Project Pages/Engineering/Suspension_System.html"
           class="project-card"
         >
           <p class="project-tag">engineering</p>
@@ -137,7 +134,7 @@
 
         <!-- PROJECT 6 -->
         <a
-          href="Project_Pages/Coding/Coding_Project1.html"
+          href="Project Pages/Coding/Coding_Project1.html"
           class="project-card"
         >
           <p class="project-tag">code</p>
@@ -147,7 +144,7 @@
         </a>
 
         <!-- PROJECT 7 -->
-        <a href="Project_Pages/Art/Elysian_Visions.html" class="project-card">
+        <a href="Project Pages/Art/Elysian_Visions.html" class="project-card">
           <p class="project-tag">art</p>
           <h3 class="project-title">Elysian Visions</h3>
           <p class="project-desc">
@@ -155,6 +152,15 @@
             High School Art Portfolio.
           </p>
           <span class="project-arrow">view project →</span>
+        </a>
+
+        <!-- SLOT 8: always the "more projects" card -->
+        <a href="all-projects.html" class="project-card project-card--more">
+          <div class="more-projects-inner">
+            <span class="more-projects-icon">⊕</span>
+            <p class="more-projects-label">all projects</p>
+            <p class="more-projects-sub">engineering · art · code</p>
+          </div>
         </a>
       </div>
     </section>
@@ -165,9 +171,17 @@
       <h2 class="section-title">Background</h2>
 
       <div class="about-grid">
-        <div class="photo-placeholder">
-          <!-- Replace with: <img src="assets/images/photo.jpg" alt="Mingyuan Chen" style="width:100%;"> -->
+        <!-- Photo — glow effect is driven by JS sampling the image colors -->
+        <div class="photo-wrap">
+          <div class="photo-glow" id="photo-glow"></div>
+          <img
+            id="about-photo"
+            src="images/general/MainPic.JPG"
+            alt="Mingyuan Chen"
+            crossorigin="anonymous"
+          />
         </div>
+
         <div class="about-text">
           <p>Hi! I go by Francois.</p>
           <p>
@@ -213,82 +227,72 @@
       <h2 class="section-title">Certifications &amp; Awards</h2>
 
       <div class="certs-grid">
+        <!-- CERTIFICATIONS: 1 real, 2 ghost placeholders -->
         <div class="certs-column">
           <h3 class="certs-column-title">Certifications</h3>
 
           <div class="cert-item">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
-              <p class="cert-title">Certification Name</p>
-              <p class="cert-meta">Issuing Organization · Month Year</p>
+              <p class="cert-title">Solidworks Associate (CSWA)</p>
+              <p class="cert-meta">Solidworks · Dec 2025</p>
               <p class="cert-desc">
-                A short note on what this covers or why it matters.
+                General Solidworks proficiency across part modeling, assemblies,
+                and drawings.
               </p>
-              <a href="#" class="btn btn-ghost btn-sm" target="_blank"
+              <a
+                href="images/Certs/Certificate_C-6KBHS5M9AW.jpg"
+                class="btn btn-ghost btn-sm"
+                target="_blank"
                 >view credential</a
               >
             </div>
           </div>
 
-          <div class="cert-item">
+          <!-- Ghost placeholder — keeps spacing, signals more to come -->
+          <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
-              <p class="cert-title">Another Certification</p>
-              <p class="cert-meta">Issuing Organization · Month Year</p>
-              <p class="cert-desc">
-                Replace with your actual certification and link to the badge or
-                certificate URL.
-              </p>
-              <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-                >view credential</a
-              >
+              <p class="cert-title">In progress</p>
+              <p class="cert-meta">— · —</p>
             </div>
           </div>
 
-          <div class="cert-item">
+          <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
-              <p class="cert-title">Third Certification</p>
-              <p class="cert-meta">Issuing Organization · Month Year</p>
+              <p class="cert-title">In progress</p>
+              <p class="cert-meta">— · —</p>
             </div>
           </div>
         </div>
 
+        <!-- AWARDS: 3 real entries -->
         <div class="certs-column">
           <h3 class="certs-column-title">Awards &amp; Honors</h3>
 
           <div class="cert-item">
             <div class="cert-icon cert-icon--award">◆</div>
             <div class="cert-body">
-              <p class="cert-title">Award or Honor Name</p>
-              <p class="cert-meta">Organization · Year</p>
-              <p class="cert-desc">
-                A line on the context: competition, event, or program it came
-                from.
-              </p>
+              <p class="cert-title">Academic Honors</p>
+              <p class="cert-meta">University of Maryland · 2026</p>
+              <p class="cert-desc">Semester Academic Honors</p>
             </div>
           </div>
 
-          <div class="cert-item">
-            <div class="cert-icon cert-icon--award">◆</div>
+          <div class="cert-item cert-item--ghost">
+            <div class="cert-icon cert-icon--award">✦</div>
             <div class="cert-body">
-              <p class="cert-title">Hackathon / Competition Win</p>
-              <p class="cert-meta">Event Name · Year</p>
-              <p class="cert-desc">
-                First place, finalist, or honorable mention — include the
-                placement.
-              </p>
-              <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-                >see project</a
-              >
+              <p class="cert-title">In progress</p>
+              <p class="cert-meta">— · —</p>
             </div>
           </div>
 
-          <div class="cert-item">
-            <div class="cert-icon cert-icon--award">◆</div>
+          <div class="cert-item cert-item--ghost">
+            <div class="cert-icon cert-icon--award">✦</div>
             <div class="cert-body">
-              <p class="cert-title">Dean's List / Academic Honor</p>
-              <p class="cert-meta">University of Maryland · Year</p>
+              <p class="cert-title">In progress</p>
+              <p class="cert-meta">— · —</p>
             </div>
           </div>
         </div>
@@ -322,12 +326,10 @@
       const canvas = document.getElementById("grain");
       const ctx = canvas.getContext("2d");
       let w, h;
-
       function resize() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
       }
-
       function drawGrain() {
         const img = ctx.createImageData(w, h);
         const d = img.data;
@@ -339,13 +341,59 @@
         ctx.putImageData(img, 0, 0);
         requestAnimationFrame(drawGrain);
       }
-
       window.addEventListener("resize", resize);
       resize();
       drawGrain();
     </script>
 
-    <!-- THREE.JS HOLOGRAM — embedded directly, no iframe -->
+    <!-- PHOTO GLOW: samples dominant color from the photo and bleeds it into the background -->
+    <script>
+      (function () {
+        const img = document.getElementById("about-photo");
+        const glow = document.getElementById("photo-glow");
+
+        function applyGlow() {
+          // Draw image to an offscreen canvas and sample a region
+          const off = document.createElement("canvas");
+          off.width = 40;
+          off.height = 40;
+          const c = off.getContext("2d");
+          c.drawImage(img, 0, 0, 40, 40);
+
+          // Sample a few pixels and average them for the dominant color
+          let r = 0,
+            g = 0,
+            b = 0,
+            count = 0;
+          const step = 4;
+          for (let y = 0; y < 40; y += step) {
+            for (let x = 0; x < 40; x += step) {
+              const px = c.getImageData(x, y, 1, 1).data;
+              // Skip very dark pixels (background) and very bright ones
+              const brightness = (px[0] + px[1] + px[2]) / 3;
+              if (brightness > 30 && brightness < 220) {
+                r += px[0];
+                g += px[1];
+                b += px[2];
+                count++;
+              }
+            }
+          }
+          if (count === 0) return;
+          r = Math.round(r / count);
+          g = Math.round(g / count);
+          b = Math.round(b / count);
+
+          // Apply as a soft radial glow behind the photo
+          glow.style.background = `radial-gradient(ellipse at center, rgba(${r},${g},${b},0.28) 0%, rgba(${r},${g},${b},0.10) 50%, transparent 75%)`;
+        }
+
+        if (img.complete) applyGlow();
+        else img.addEventListener("load", applyGlow);
+      })();
+    </script>
+
+    <!-- THREE.JS HOLOGRAM -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
       (function () {
@@ -362,7 +410,7 @@
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
-        camera.position.set(-1.8, 0, 4); // shifted right so rocket is in right half
+        camera.position.set(-1.6, 0, 4);
 
         scene.add(new THREE.AmbientLight(0x4433ff, 0.5));
         const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
@@ -382,10 +430,9 @@
           side: THREE.DoubleSide,
         });
 
-        // Size canvas to match hero section
         function onResize() {
-          const w = hero.clientWidth;
-          const h = hero.clientHeight;
+          const w = hero.clientWidth,
+            h = hero.clientHeight;
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
@@ -394,17 +441,13 @@
         window.addEventListener("resize", onResize);
         onResize();
 
-        // Only treat mouse events as rocket interaction when cursor
-        // is in the right 45% of the hero (where the rocket lives)
         function isOverRocket(clientX) {
           const rect = hero.getBoundingClientRect();
-          const relX = (clientX - rect.left) / rect.width;
-          return relX > 0.55; // right 45% of hero
+          return (clientX - rect.left) / rect.width > 0.55;
         }
 
         let isDragging = false,
           lastX = 0;
-
         holoCanvas.addEventListener("mousedown", (e) => {
           if (!isOverRocket(e.clientX)) return;
           isDragging = true;
@@ -420,17 +463,13 @@
           pivot.rotation.y += (e.clientX - lastX) * 0.008;
           lastX = e.clientX;
         });
-
-        // Show grab cursor only when hovering the rocket zone
         holoCanvas.addEventListener("mousemove", (e) => {
-          if (!isDragging) {
+          if (!isDragging)
             holoCanvas.style.cursor = isOverRocket(e.clientX)
               ? "grab"
               : "default";
-          }
         });
 
-        // Touch — same zone check
         let lastTX = 0;
         holoCanvas.addEventListener("touchstart", (e) => {
           if (!isOverRocket(e.touches[0].clientX)) return;
@@ -447,7 +486,6 @@
           { passive: false },
         );
 
-        // STL parsers
         function parseSTLBinary(buf) {
           const dv = new DataView(buf);
           const count = dv.getUint32(80, true);
@@ -471,8 +509,8 @@
         }
 
         function parseSTLASCII(text) {
-          const verts = [];
-          const re = /vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g;
+          const verts = [],
+            re = /vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g;
           let m;
           while ((m = re.exec(text)) !== null)
             verts.push(parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]));
@@ -504,20 +542,13 @@
 
           const mesh = new THREE.Mesh(geo, holoMat);
           mesh.scale.setScalar(scale);
-          mesh.rotation.z = THREE.MathUtils.degToRad(-30); // negative = nose up
+          mesh.rotation.z = THREE.MathUtils.degToRad(-30);
 
           pivot = new THREE.Group();
           pivot.add(mesh);
           scene.add(pivot);
-
-          console.log(
-            "Rocket loaded ✓",
-            (buf.byteLength / 1024 / 1024).toFixed(1) + " MB",
-            geo.attributes.position.count.toLocaleString() + " verts",
-          );
         }
 
-        // Render loop
         let t = 0;
         function animate() {
           requestAnimationFrame(animate);
@@ -529,8 +560,6 @@
         }
         animate();
 
-        // Load STL
-        // ▶ Update this path if your filename differs
         fetch("STL/L1_Rocket.STL")
           .then((res) => {
             if (!res.ok) throw new Error("HTTP " + res.status);

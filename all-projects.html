@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Projects — Mingyuan Chen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .all-hero {
+        padding: 9rem 3rem 3rem;
+      }
+
+      .filter-bar {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+      .filter-btn {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.45rem 1rem;
+        border-radius: 3px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .filter-btn:hover {
+        border-color: rgba(124, 106, 245, 0.4);
+        color: var(--text);
+      }
+      .filter-btn.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(124, 106, 245, 0.08);
+      }
+
+      .all-grid-wrap {
+        padding: 0 3rem 6rem;
+      }
+
+      .project-card.hidden {
+        display: none;
+      }
+
+      .back-link {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .back-link:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 680px) {
+        .all-hero,
+        .all-grid-wrap {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <span class="nav-logo">mingyuanchen</span>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">work</a></li>
+        <li><a href="index.html#about">about</a></li>
+        <li><a href="index.html#certs">awards</a></li>
+        <li><a href="index.html#contact">contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="all-hero">
+      <a href="index.html" class="back-link">← back home</a>
+      <div style="height: 2rem"></div>
+      <p class="section-label">complete work</p>
+      <h1
+        style="
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 500;
+          letter-spacing: -0.025em;
+          margin-bottom: 1rem;
+        "
+      >
+        All Projects
+      </h1>
+      <p
+        style="
+          color: var(--muted);
+          font-size: 0.95rem;
+          max-width: 500px;
+          margin-bottom: 2.5rem;
+          line-height: 1.8;
+        "
+      >
+        Everything I've built, designed, and created — across engineering, code,
+        and art.
+      </p>
+
+      <!-- Filter buttons -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filter('all', this)">
+          all
+        </button>
+        <button class="filter-btn" onclick="filter('engineering', this)">
+          engineering
+        </button>
+        <button class="filter-btn" onclick="filter('code', this)">code</button>
+        <button class="filter-btn" onclick="filter('art', this)">art</button>
+      </div>
+    </div>
+
+    <div class="all-grid-wrap">
+      <div class="project-grid">
+        <!-- ── ENGINEERING ── -->
+        <a
+          href="Project Pages/Engineering/L1_Rocket.html"
+          class="project-card"
+          data-tag="engineering"
+        >
+          <p class="project-tag">engineering</p>
+          <h3 class="project-title">L1 Rocket</h3>
+          <p class="project-desc">
+            My L1 Certification rocket and the testing rocket for UMD's
+            two-stage subteam of the Terrapin Rocket team.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <a
+          href="Project Pages/Engineering/Seed_Planting_OTV.html"
+          class="project-card"
+          data-tag="engineering"
+        >
+          <p class="project-tag">engineering</p>
+          <h3 class="project-title">Seed Planting OTV</h3>
+          <p class="project-desc">
+            An autonomous rover to navigate obstacles while completing a seed
+            planting task.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <a
+          href="Project Pages/Engineering/Limit_Switch_Holder.html"
+          class="project-card"
+          data-tag="engineering"
+        >
+          <p class="project-tag">engineering</p>
+          <h3 class="project-title">Limit Switch Holder</h3>
+          <p class="project-desc">
+            The bottom limit switch holder in the airbrake of our 2026 Spaceport
+            America Cup competition rocket.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <a
+          href="Project Pages/Engineering/Wooden_Truss.html"
+          class="project-card"
+          data-tag="engineering"
+        >
+          <p class="project-tag">engineering</p>
+          <h3 class="project-title">Wooden Truss</h3>
+          <p class="project-desc">
+            A wooden truss designed to withstand a 1000 pound force load.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <a
+          href="Project Pages/Engineering/Suspension_System.html"
+          class="project-card"
+          data-tag="engineering"
+        >
+          <p class="project-tag">engineering</p>
+          <h3 class="project-title">Suspension System</h3>
+          <p class="project-desc">
+            A 3D model of a simplified car suspension system.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <!-- ── CODE ── -->
+        <a
+          href="Project Pages/Coding/Coding_Project1.html"
+          class="project-card"
+          data-tag="code"
+        >
+          <p class="project-tag">code</p>
+          <h3 class="project-title">Coding Project</h3>
+          <p class="project-desc">Placeholder for a coding project.</p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <!-- ── ART ── -->
+        <a
+          href="Project Pages/Art/Elysian_Visions.html"
+          class="project-card"
+          data-tag="art"
+        >
+          <p class="project-tag">art</p>
+          <h3 class="project-title">Elysian Visions</h3>
+          <p class="project-desc">
+            Painting and artworks across a variety of mediums and styles. My
+            High School Art Portfolio.
+          </p>
+          <span class="project-arrow">view project →</span>
+        </a>
+
+        <!-- ▶ Add new projects here — copy a card block above and update the tag, title, desc, and href -->
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 Mingyuan Chen</span>
+      <span>built with github pages</span>
+    </footer>
+
+    <script>
+      function filter(tag, btn) {
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".project-card").forEach((card) => {
+          card.classList.toggle(
+            "hidden",
+            tag !== "all" && card.dataset.tag !== tag,
+          );
+        });
+      }
+    </script>
+  </body>
+</html>
