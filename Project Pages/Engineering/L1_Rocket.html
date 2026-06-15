@@ -442,15 +442,16 @@
         <!-- BLOCK 1: Overview — image right -->
         <div class="content-block">
           <div class="content-text">
-            <h2>Overview</h2>
+            <h2>Overview & Role</h2>
             <p>
-              Write 2–3 sentences explaining the project at a high level. What
-              is it, what does it do, and why does it exist? Assume the reader
-              has no context.
+              Originally tasked with creating a two-stage L1 rocket, I had to
+              pivot to making a one-stage rocket first. Below you will find my
+              work in simulation, CAD design, and manufacturing, as well as the
+              interations I went through to reach my final product.
             </p>
             <p>
-              Add a second paragraph if needed to cover background or
-              motivation.
+              This was my personal club project so all work was done by me
+              alone.
             </p>
           </div>
           <div class="visual-slot placeholder">
@@ -459,53 +460,179 @@
           </div>
         </div>
 
-        <!-- BLOCK 2: My Role — image left (flipped) -->
+        <!-- Step 1: Simulation -->
         <div class="content-block flip">
           <div class="content-text">
             <h2>My Role</h2>
             <p>
-              Describe specifically what you contributed. Instead of "I helped
-              with," say "I designed the fin geometry in Fusion 360 and ran
-              stress simulations to validate the load cases."
+              I used openrocket to create the inital design for my two-stage
+              rocket but then took the sustainer of said design and redesigned
+              it as a dual deploy L1 rocket.
+            </p>
+            <p>
+              The image on the right is my final sustainer design of my
+              two-stage rocket as well as my L1 rocket.
             </p>
           </div>
           <div class="visual-slot placeholder">
-            <!-- ▶ Replace with real image -->
-            [ image ]
+            <img
+              src="../../images/engineering/L1 Rocket/Openrocket L1 Sim.png"
+              alt="Image Loading"
+            /><!-- change image size bc its too big rn -->
           </div>
         </div>
 
-        <!-- BLOCK 3: Technical Details — image right -->
+        <!-- Step 2: CAD -->
         <div class="content-block">
           <div class="content-text">
-            <h2>Technical Details</h2>
-            <p>Engineering decisions, tradeoffs, and key specs:</p>
-            <ul>
-              <li>Apogee target: X ft AGL</li>
-              <li>Airframe material: fiberglass / carbon fiber</li>
-              <li>Motor class: L / M</li>
-              <li>Recovery: dual-deploy, electronic deployment</li>
-              <li>Simulation tool: OpenRocket</li>
-            </ul>
+            <h2>CAD Design</h2>
+            <p>
+              I CADDed up all parts that would need to be manufactured and
+              assembled them together along with COTS parts (such as rail
+              buttons, nuts, bolts, and some electronics) to fully model my
+              rocket. I made a BOM as seen on the right to estimate my costs.
+            </p>
+            <p>
+              The most iterated on part of my rocket design was my Electronics
+              Bay (E-Bay). You can see my initial design along with all other
+              iterations labeled below.
+            </p>
           </div>
           <div class="visual-slot placeholder">
-            <!-- ▶ Replace with real image, CAD screenshot, or simulation result -->
-            [ image ]
+            <img
+              src="../../images/engineering/L1 Rocket/BOM.png"
+              alt="Image Loading"
+            />
+            <!-- maybe replace with hologram of v1 -->
+          </div>
+        </div>
+        <!-- more pics to the ebay section (V1) -->
+        <div class="content-block">
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
+              alt="Image Loading"
+            />
+            <p>
+              My first E-Bay design. Designed to sit in the nose cone of my
+              rocket, the main problem was if the threads could hold everything
+              in place on the return trip.
+            </p>
+          </div>
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
+              alt="Image Loading"
+            />
+            <p>
+              I printed my design and found that the threadings held quite well
+              and it was time to create a design that could house all of the
+              electronics.
+            </p>
+          </div>
+        </div>
+        <!-- even more pics to the ebay section (V2) -->
+        <div class="content-block">
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
+              alt="Image Loading"
+            />
+            <p>
+              My ebay design that housed all electronics: a Lipo Battery, Screw
+              Switch, Blue Raven Altimeter, Featherweight GPS, and another
+              backup Altimeter.
+            </p>
+          </div>
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
+              alt="Image Loading"
+            />
+            <p>
+              The exploded view of my V2 design including all screws and other
+              COTS parts.
+            </p>
+          </div>
+        </div>
+        <!-- even more pics to the ebay section (V3+) -->
+        <div class="content-block">
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
+              alt="Image Loading"
+            />
+            <p>
+              I had gotten the inital voltage calculations incorrect and
+              actually needed 3 batteries and so I also needed 3 screw switches.
+              This design encorperates them all and upon finishing it, I
+              realized the space was too cramped to hold everything well.
+            </p>
+          </div>
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
+              alt="Image Loading"
+            />
+            <p>
+              My fourth iteration of the E-bay. It was a more standard E-bay
+              that was housed as a dual deploy and gave me just a little more
+              space to work with (though this design may also have worked in the
+              nose cone but I was advised against it).
+            </p>
+          </div>
+        </div>
+        <!-- even more pics to the ebay section (VFinal) -->
+        <div class="content-block">
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
+              alt="Image Loading"
+            />
+            <p>
+              My final design of the E-Bay that was way more compact and housed
+              the batteries more effectively. I also removed the backup
+              altimeter and so moved down to two batteries (2 screw switches).
+            </p>
+          </div>
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
+              alt="Image Loading"
+            />
+            <p>The exploded view with all COTS components.</p>
+          </div>
+        </div>
+        <!-- even more pics to the ebay section (VFinal cont.) -->
+        <div class="content-block">
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
+              alt="Image Loading"
+            />
+            <p>Another view</p>
+          </div>
+          <div class="visual-slot placeholder">
+            <img
+              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
+              alt="Image Loading"
+            />
+            <p>Everything printed and test fitted.</p>
           </div>
         </div>
 
-        <!-- BLOCK 4: Outcome — image left (flipped) -->
+        <!-- BLOCK 4: Outcome -->
         <div class="content-block flip">
           <div class="content-text">
             <h2>Outcome</h2>
             <p>
-              What happened? Did the rocket fly? What did you learn? Any future
-              work planned? Close the loop so the reader leaves with a sense of
-              resolution.
+              I lasercut and printed out the remaining components of my rocket
+              (including the fin drying supports) and it is awaiting
+              construction.
             </p>
           </div>
           <div class="visual-slot placeholder">
-            <!-- ▶ Replace with launch photo or result image -->
+            <!-- hologram of my sustainer fin jigs stl -->
             [ image ]
           </div>
         </div>
@@ -524,7 +651,7 @@
           <div class="sidebar-row">
             <span>subteam</span><span>Two-Stage</span>
           </div>
-          <div class="sidebar-row"><span>start</span><span>2024</span></div>
+          <div class="sidebar-row"><span>start</span><span>Oct 2025</span></div>
           <div class="sidebar-row">
             <span>status</span><span>In progress</span>
           </div>
