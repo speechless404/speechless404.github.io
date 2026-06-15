@@ -362,7 +362,7 @@
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
-        camera.position.set(-1.6, 0, 4); // shifted right so rocket is in right half
+        camera.position.set(-1.8, 0, 4); // shifted right so rocket is in right half
 
         scene.add(new THREE.AmbientLight(0x4433ff, 0.5));
         const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
@@ -389,10 +389,63 @@
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
+          camera.lookAt(-1.6, 0, 0);
         }
         window.addEventListener("resize", onResize);
         onResize();
-        camera.lookAt(-1.6, 0, 0); // look at same x offset so rocket is centered right
+
+        // Only treat mouse events as rocket interaction when cursor
+        // is in the right 45% of the hero (where the rocket lives)
+        function isOverRocket(clientX) {
+          const rect = hero.getBoundingClientRect();
+          const relX = (clientX - rect.left) / rect.width;
+          return relX > 0.55; // right 45% of hero
+        }
+
+        let isDragging = false,
+          lastX = 0;
+
+        holoCanvas.addEventListener("mousedown", (e) => {
+          if (!isOverRocket(e.clientX)) return;
+          isDragging = true;
+          lastX = e.clientX;
+          holoCanvas.style.cursor = "grabbing";
+        });
+        window.addEventListener("mouseup", () => {
+          isDragging = false;
+          holoCanvas.style.cursor = "";
+        });
+        window.addEventListener("mousemove", (e) => {
+          if (!isDragging || !pivot) return;
+          pivot.rotation.y += (e.clientX - lastX) * 0.008;
+          lastX = e.clientX;
+        });
+
+        // Show grab cursor only when hovering the rocket zone
+        holoCanvas.addEventListener("mousemove", (e) => {
+          if (!isDragging) {
+            holoCanvas.style.cursor = isOverRocket(e.clientX)
+              ? "grab"
+              : "default";
+          }
+        });
+
+        // Touch — same zone check
+        let lastTX = 0;
+        holoCanvas.addEventListener("touchstart", (e) => {
+          if (!isOverRocket(e.touches[0].clientX)) return;
+          lastTX = e.touches[0].clientX;
+        });
+        holoCanvas.addEventListener(
+          "touchmove",
+          (e) => {
+            if (!pivot || !isOverRocket(e.touches[0].clientX)) return;
+            e.preventDefault();
+            pivot.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
+            lastTX = e.touches[0].clientX;
+          },
+          { passive: false },
+        );
 
         // STL parsers
         function parseSTLBinary(buf) {
@@ -447,7 +500,7 @@
           geo.computeBoundingBox();
           const size = new THREE.Vector3();
           geo.boundingBox.getSize(size);
-          const scale = 1.6 / Math.max(size.x, size.y, size.z);
+          const scale = 2.1 / Math.max(size.x, size.y, size.z);
 
           const mesh = new THREE.Mesh(geo, holoMat);
           mesh.scale.setScalar(scale);
