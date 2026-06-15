@@ -155,22 +155,38 @@ section + section { border-top: 1px solid var(--border); }
 .photo-wrap {
   position: relative;
 }
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.06); }
+}
+
 .photo-glow {
   position: absolute;
-  inset: -40px;
+  /* extend well beyond the photo edges to bleed into the section */
+  inset: -120px -80px -120px -80px;
   z-index: 0;
   pointer-events: none;
-  border-radius: 50%;
   background: transparent;
-  filter: blur(32px);
-  transition: background 1s ease;
+  filter: blur(55px);
+  animation: glow-pulse 6s ease-in-out infinite;
+  transition: background 0.8s ease;
 }
+
 .photo-wrap img {
   position: relative;
   z-index: 1;
   width: 100%;
   display: block;
   border-radius: 2px;
+}
+
+/* Make the about section itself not clip the glow */
+#about {
+  overflow: visible;
+}
+.about-grid {
+  overflow: visible;
 }
 
 /* ── GHOST CERT PLACEHOLDERS ── */
@@ -195,13 +211,13 @@ a.project-card:visited {
   align-items: center;
   justify-content: center;
   min-height: 180px;
-  background: transparent !important;
-  border: 1px dashed rgba(124,106,245,0.3);
+  background: var(--surface) !important;
+  border: 1px dashed rgba(124,106,245,0.15) !important;
   transition: border-color 0.2s, background 0.2s !important;
 }
 .project-card--more:hover {
-  background: rgba(124,106,245,0.06) !important;
-  border-color: rgba(124,106,245,0.6) !important;
+  background: rgba(124,106,245,0.05) !important;
+  border-color: rgba(124,106,245,0.35) !important;
 }
 .more-projects-inner {
   display: flex;
@@ -213,22 +229,23 @@ a.project-card:visited {
 .more-projects-icon {
   font-size: 2rem;
   color: var(--accent);
-  opacity: 0.5;
+  opacity: 0.25;
   transition: opacity 0.2s;
 }
-.project-card--more:hover .more-projects-icon { opacity: 1; }
+.project-card--more:hover .more-projects-icon { opacity: 0.6; }
 .more-projects-label {
   font-family: var(--mono);
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
 }
 .more-projects-sub {
   font-family: var(--mono);
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   color: var(--muted);
+  opacity: 0.5;
 }
 .more-projects-inner {
   display: flex;
