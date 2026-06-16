@@ -28,7 +28,7 @@ main hologram:
 
     Designing and creating a wooden truss with certain constraints to withstand a 1000lb force.
 
-    This was a team project and everyone worked together on the mass majority of the project. In particular, I took lead in assembling the truss but worked less on CAD design.
+    This was a team project and everyone worked together on the mass majority of the project. In particular, I took lead in assembling the truss but worked less on the CAD.
 
     talk ab calcs done
     - material selection
@@ -36,3 +36,7 @@ main hologram:
     - calculations
 
     - testing and results
+
+Miscellaneous
+
+    A collection of mini projects.
