@@ -313,7 +313,7 @@
 
     <!-- Prev / Next -->
     <div class="project-nav">
-      <a href="../../index.html#projects">home</a>
+      <a href="../../index.html#projects">← home</a>
       <a href="Seed_Planting_OTV.html">next project →</a>
     </div>
 
@@ -585,7 +585,7 @@
           geo.boundingBox.getSize(sz);
           const mesh = new THREE.Mesh(geo, holoMat);
           mesh.scale.setScalar(scale / Math.max(sz.x, sz.y, sz.z));
-          mesh.rotation.z = THREE.MathUtils.degToRad(-30);
+          mesh.rotation.x = THREE.MathUtils.degToRad(-90);
           pivot = new THREE.Group();
           pivot.add(mesh);
           scene.add(pivot);
