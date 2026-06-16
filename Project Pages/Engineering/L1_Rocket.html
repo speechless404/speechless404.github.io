@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="../../style.css" />
     <style>
-      /* ── PROJECT PAGE EXTRAS (CSS) ── */
+      /* ── BACK LINK ── */
       .back-link {
         display: inline-flex;
         align-items: center;
@@ -26,6 +26,12 @@
       }
       .back-link:hover {
         color: var(--accent);
+      }
+
+      /* Nav logo as link */
+      .nav-logo {
+        cursor: pointer;
+        text-decoration: none;
       }
 
       /* ── HERO ── */
@@ -84,13 +90,12 @@
       .holo-strip:active {
         cursor: grabbing;
       }
-      #proj-holo-canvas {
+      .holo-canvas {
         position: absolute;
         inset: 0;
         width: 100% !important;
         height: 100% !important;
       }
-      /* Scan lines overlay */
       .holo-strip::after {
         content: "";
         position: absolute;
@@ -105,7 +110,6 @@
         pointer-events: none;
         z-index: 2;
       }
-      /* Corner brackets */
       .holo-bracket {
         position: absolute;
         width: 24px;
@@ -136,7 +140,6 @@
         right: 14px;
         border-width: 0 1px 1px 0;
       }
-      /* HUD */
       .holo-hud {
         position: absolute;
         font-family: var(--mono);
@@ -195,7 +198,7 @@
         animation: proj-flicker 8s ease-in-out infinite;
       }
 
-      /* ── MAIN LAYOUT: prose left, sidebar pinned right ── */
+      /* ── MAIN LAYOUT ── */
       .project-layout {
         display: grid;
         grid-template-columns: 1fr 260px;
@@ -203,13 +206,12 @@
         align-items: start;
         padding: 0 0 6rem;
       }
-
       .project-prose {
         padding: 0 3rem;
         border-right: 1px solid var(--border);
       }
 
-      /* ── IMAGE + TEXT PAIRS ── */
+      /* ── CONTENT BLOCKS (text + image alternating) ── */
       .content-block {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -224,8 +226,6 @@
       .content-block:last-child {
         border-bottom: none;
       }
-
-      /* Alternate: odd blocks image-left, even blocks image-right */
       .content-block.flip {
         direction: rtl;
       }
@@ -256,41 +256,101 @@
         margin-bottom: 0.25rem;
       }
 
-      /* Visual slot — image or placeholder */
+      /* ── VISUAL SLOT: image + caption ── */
       .visual-slot {
-        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
         border: 1px solid var(--border);
         border-radius: 3px;
         overflow: hidden;
-        aspect-ratio: 4/3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: var(--surface);
       }
       .visual-slot img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
         display: block;
+        object-fit: contain; /* show full image, no crop */
+        background: var(--surface);
         transition: transform 0.4s ease;
       }
       .visual-slot:hover img {
-        transform: scale(1.03);
+        transform: scale(1.02);
       }
-      .visual-slot.placeholder {
+      .visual-caption {
+        padding: 0.75rem 1rem;
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.6;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+      /* Placeholder when no image yet */
+      .visual-slot.placeholder-box {
+        aspect-ratio: 4/3;
+        align-items: center;
+        justify-content: center;
         font-family: var(--mono);
         font-size: 0.65rem;
         letter-spacing: 0.1em;
         color: var(--accent-dim);
-        flex-direction: column;
-        gap: 0.5rem;
+      }
+
+      /* ── DOUBLE IMAGE BLOCK (two images side by side) ── */
+      .image-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        margin: 0;
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .image-pair .visual-slot {
+        border: none;
+        border-radius: 0;
+      }
+
+      /* ── INLINE HOLOGRAM (in content area) ── */
+      .inline-holo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        border: 1px solid rgba(124, 106, 245, 0.2);
+        border-radius: 3px;
+        cursor: grab;
+      }
+      .inline-holo:active {
+        cursor: grabbing;
+      }
+      .inline-holo canvas {
+        position: absolute;
+        inset: 0;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      .inline-holo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 2px,
+          rgba(0, 0, 0, 0.08) 2px,
+          rgba(0, 0, 0, 0.08) 4px
+        );
+        pointer-events: none;
+        z-index: 2;
       }
 
       /* ── SIDEBAR ── */
       .project-sidebar {
         position: sticky;
         top: 6rem;
-        padding: 2rem 2rem 2rem 2rem;
+        padding: 2rem;
         align-self: start;
       }
       .sidebar-block {
@@ -328,16 +388,23 @@
       .sidebar-row span:last-child {
         color: var(--text);
       }
-      .sidebar-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .sidebar-links .btn {
+
+      /* Tools: single centered items, matching body font */
+      .tools-item {
+        display: block;
         text-align: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border);
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: var(--muted);
+      }
+      .tools-item:last-child {
+        border-bottom: none;
       }
 
-      /* ── PREV / NEXT NAV ── */
+      /* ── NAV ── */
       .project-nav {
         display: flex;
         justify-content: space-between;
@@ -380,6 +447,9 @@
         .content-block.flip {
           direction: ltr;
         }
+        .image-pair {
+          grid-template-columns: 1fr;
+        }
         .project-nav {
           padding: 2rem 1.5rem;
           flex-direction: column;
@@ -389,9 +459,11 @@
     </style>
   </head>
   <body>
-    <!-- NAV -->
+    <!-- NAV — logo links home -->
     <nav>
-      <span class="nav-logo">mingyuanchen</span>
+      <a href="../../index.html" class="nav-logo" style="text-decoration: none"
+        >mingyuanchen</a
+      >
       <ul class="nav-links">
         <li><a href="../../index.html#projects">work</a></li>
         <li><a href="../../index.html#about">about</a></li>
@@ -404,7 +476,6 @@
     <div class="project-hero">
       <a href="../../index.html#projects" class="back-link">← home</a>
       <div style="height: 2rem"></div>
-
       <p class="hero-eyebrow">engineering</p>
       <h1 class="project-title-large">L1 Rocket</h1>
       <p class="project-subtitle">
@@ -412,7 +483,6 @@
         two-stage subteam — designed, built, and flown to earn my high-power
         rocketry certification.
       </p>
-
       <div class="project-meta">
         <span class="meta-pill accent">engineering</span>
         <span class="meta-pill">UMD Terrapin Rockets</span>
@@ -421,7 +491,7 @@
       </div>
     </div>
 
-    <!-- ── HOLOGRAM ── -->
+    <!-- ── MAIN HOLOGRAM ── -->
     <div class="holo-strip" id="holo-strip">
       <div class="holo-bracket tl"></div>
       <div class="holo-bracket tr"></div>
@@ -431,23 +501,22 @@
       <div class="holo-hud tr">hologram · v1</div>
       <div class="holo-hud bl" id="holo-verts"></div>
       <div class="holo-hud br" id="holo-rot">rot 0°</div>
-      <canvas id="proj-holo-canvas"></canvas>
+      <canvas id="proj-holo-canvas" class="holo-canvas"></canvas>
       <div class="holo-hint">drag to rotate · scroll to zoom</div>
     </div>
 
     <!-- ── MAIN LAYOUT ── -->
     <div class="project-layout">
-      <!-- LEFT: alternating image/text blocks -->
       <div class="project-prose">
-        <!-- BLOCK 1: Overview — image right -->
+        <!-- BLOCK 1: Overview -->
         <div class="content-block">
           <div class="content-text">
-            <h2>Overview & Role</h2>
+            <h2>Overview &amp; Role</h2>
             <p>
               Originally tasked with creating a two-stage L1 rocket, I had to
               pivot to making a one-stage rocket first. Below you will find my
               work in simulation, CAD design, and manufacturing, as well as the
-              interations I went through to reach my final product.
+              iterations I went through to reach my final product.
             </p>
             <p>This was my personal club project so all work was done by me.</p>
             <p>
@@ -455,187 +524,188 @@
               bottom of this page.
             </p>
           </div>
-          <div class="visual-slot placeholder">
-            <!-- ▶ Replace with: <img src="../../images/engineering/l1/overview.jpg" alt="Overview"> -->
-            [ image ]
-          </div>
+          <div class="visual-slot placeholder-box">[ image ]</div>
         </div>
 
-        <!-- Step 1: Simulation -->
+        <!-- BLOCK 2: Simulation -->
         <div class="content-block flip">
           <div class="content-text">
             <h2>Simulation</h2>
             <p>
-              I used openrocket to create the inital design for my two-stage
-              rocket but then took the sustainer of said design and redesigned
-              it as a dual deploy L1 rocket.
+              I used OpenRocket to create the initial design for my two-stage
+              rocket, then took the sustainer of that design and redesigned it
+              as a dual-deploy L1 rocket.
             </p>
             <p>
-              The image on the right is my final sustainer design of my
-              two-stage rocket as well as my L1 rocket. The design follows a
-              variety of contraints such as length, width, & stability.
+              The image shows my final sustainer design — also my L1 rocket. The
+              design satisfies constraints on length, width, and stability.
             </p>
           </div>
-          <div class="visual-slot placeholder">
+          <div class="visual-slot">
             <img
               src="../../images/engineering/L1 Rocket/Openrocket L1 Sim.png"
-              alt="Image Loading"
-            /><!-- change image size bc its too big rn -->
+              alt="OpenRocket simulation"
+            />
+            <div class="visual-caption">
+              OpenRocket simulation — final sustainer / L1 design.
+            </div>
           </div>
         </div>
 
-        <!-- Step 2: CAD -->
+        <!-- BLOCK 3: CAD Design -->
         <div class="content-block">
           <div class="content-text">
             <h2>CAD Design</h2>
             <p>
-              I CADDed up all parts that would need to be manufactured and
-              assembled them together along with COTS parts (such as rail
-              buttons, nuts, bolts, and some electronics) to fully model my
-              rocket. I made a BOM as seen on the right to estimate my costs.
+              I modelled all manufactured parts in SOLIDWORKS and assembled them
+              alongside COTS parts (rail buttons, hardware, electronics) to
+              produce a full rocket model. A BOM was created to estimate costs.
             </p>
             <p>
-              The most iterated on part of my rocket design was my Electronics
-              Bay (E-Bay). You can see my initial design along with all other
-              iterations labeled below.
+              The most iterated component was the Electronics Bay (E-Bay). All
+              iterations are shown below.
             </p>
           </div>
-          <div class="visual-slot placeholder">
+          <div class="visual-slot">
             <img
               src="../../images/engineering/L1 Rocket/BOM.png"
-              alt="Image Loading"
+              alt="Bill of Materials"
             />
-            <!-- maybe replace with hologram of v1 -->
-          </div>
-        </div>
-        <!-- more pics to the ebay section (V1) -->
-        <div class="content-block">
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
-              alt="Image Loading"
-            />
-            <p>
-              My first E-Bay design. Designed to sit in the nose cone of my
-              rocket, the main problem was if the threads could hold everything
-              in place on the return trip.
-            </p>
-          </div>
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
-              alt="Image Loading"
-            />
-            <p>
-              I printed my design and found that the threadings held quite well
-              and it was time to create a design that could house all of the
-              electronics.
-            </p>
-          </div>
-        </div>
-        <!-- even more pics to the ebay section (V2) -->
-        <div class="content-block">
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
-              alt="Image Loading"
-            />
-            <p>
-              My ebay design that housed all electronics: a Lipo Battery, Screw
-              Switch, Blue Raven Altimeter, Featherweight GPS, and another
-              backup Altimeter.
-            </p>
-          </div>
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
-              alt="Image Loading"
-            />
-            <p>
-              The exploded view of my V2 design including all screws and other
-              COTS parts.
-            </p>
-          </div>
-        </div>
-        <!-- even more pics to the ebay section (V3+) -->
-        <div class="content-block">
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
-              alt="Image Loading"
-            />
-            <p>
-              I had gotten the inital voltage calculations incorrect and
-              actually needed 3 batteries and so I also needed 3 screw switches.
-              This design encorperates them all and upon finishing it, I
-              realized the space was too cramped to hold everything well.
-            </p>
-          </div>
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
-              alt="Image Loading"
-            />
-            <p>
-              My fourth iteration of the E-bay. It was a more standard E-bay
-              that was housed as a dual deploy and gave me just a little more
-              space to work with (though this design may also have worked in the
-              nose cone but I was advised against it).
-            </p>
-          </div>
-        </div>
-        <!-- even more pics to the ebay section (VFinal) -->
-        <div class="content-block">
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
-              alt="Image Loading"
-            />
-            <p>
-              My final design of the E-Bay that was way more compact and housed
-              the batteries more effectively. I also removed the backup
-              altimeter and so moved down to two batteries (2 screw switches).
-            </p>
-          </div>
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
-              alt="Image Loading"
-            />
-            <p>The exploded view with all COTS components.</p>
-          </div>
-        </div>
-        <!-- even more pics to the ebay section (VFinal cont.) -->
-        <div class="content-block">
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
-              alt="Image Loading"
-            />
-            <p>Another view</p>
-          </div>
-          <div class="visual-slot placeholder">
-            <img
-              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
-              alt="Image Loading"
-            />
-            <p>Everything printed and test fitted.</p>
+            <div class="visual-caption">
+              Bill of Materials used to estimate project cost.
+            </div>
           </div>
         </div>
 
-        <!-- BLOCK 4: Outcome -->
+        <!-- E-Bay V1 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
+              alt="E-Bay V1 CAD"
+            />
+            <div class="visual-caption">
+              V1 — designed to sit in the nose cone. The main concern was
+              whether the threads could hold everything in place on descent.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
+              alt="E-Bay V1 Printed"
+            />
+            <div class="visual-caption">
+              V1 printed. Threading held well, so the next step was fitting all
+              electronics inside.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay V2 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
+              alt="E-Bay V2 CAD"
+            />
+            <div class="visual-caption">
+              V2 — houses all electronics: LiPo battery, screw switch, Blue
+              Raven altimeter, Featherweight GPS, and a backup altimeter.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
+              alt="E-Bay V2 Exploded"
+            />
+            <div class="visual-caption">
+              V2 exploded view including all screws and COTS components.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay V3/V4 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
+              alt="E-Bay V3 CAD"
+            />
+            <div class="visual-caption">
+              V3 — voltage calculations were wrong; needed 3 batteries and 3
+              screw switches. Space became too cramped.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
+              alt="E-Bay V4 CAD"
+            />
+            <div class="visual-caption">
+              V4 — switched to a standard dual-deploy E-Bay housing for slightly
+              more working space.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay Final -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
+              alt="E-Bay Final CAD"
+            />
+            <div class="visual-caption">
+              Final design — more compact, better battery layout. Removed backup
+              altimeter, reducing to two batteries and two screw switches.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
+              alt="E-Bay Final Exploded"
+            />
+            <div class="visual-caption">
+              Final exploded view with all COTS components.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay Final cont. -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
+              alt="E-Bay Final View"
+            />
+            <div class="visual-caption">
+              Additional view of the final E-Bay design.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
+              alt="E-Bay Final Printed"
+            />
+            <div class="visual-caption">
+              Final design printed and test fitted.
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK: Outcome with inline hologram -->
         <div class="content-block flip">
           <div class="content-text">
             <h2>Outcome</h2>
             <p>
-              I lasercut and printed out the remaining components of my rocket
-              (including the fin drying supports) and it is awaiting
-              construction.
+              I laser-cut and 3D-printed the remaining components of my rocket
+              (including the fin drying supports) and it is awaiting final
+              construction and launch.
             </p>
           </div>
-          <div class="visual-slot placeholder">
-            <!-- hologram of my sustainer fin jigs stl -->
-            [ image ]
+          <!-- Inline hologram for the fin jig STL -->
+          <div class="inline-holo" id="outcome-holo">
+            <canvas id="outcome-holo-canvas"></canvas>
           </div>
         </div>
       </div>
@@ -661,15 +731,15 @@
 
         <div class="sidebar-block">
           <p class="sidebar-label">tools</p>
-          <div class="sidebar-row"><span>SOLIDWORKS</span></div>
-          <div class="sidebar-row"><span>OpenRocket</span></div>
-          <div class="sidebar-row"><span>Laser Cutter</span></div>
-          <div class="sidebar-row"><span>3D Printing</span></div>
+          <span class="tools-item">SOLIDWORKS</span>
+          <span class="tools-item">OpenRocket</span>
+          <span class="tools-item">Laser Cutter</span>
+          <span class="tools-item">3D Printing</span>
         </div>
       </aside>
     </div>
 
-    <!-- ── LINKS (bottom of page) ── -->
+    <!-- ── LINKS ── -->
     <div style="padding: 3rem; border-top: 1px solid var(--border)">
       <p class="section-label">links</p>
       <div
@@ -679,13 +749,13 @@
           href="../../Other Files/Freshman/Revision 1 1H Sim.ork"
           class="btn btn-ghost"
           target="_blank"
-          >Openrocket</a
+          >OpenRocket File</a
         >
         <a
           href="../../Other Files/Freshman/1H Manufacturing.zip"
           class="btn btn-ghost"
           target="_blank"
-          >CAD</a
+          >CAD Files</a
         >
       </div>
     </div>
@@ -702,15 +772,22 @@
       <span>built with github pages</span>
     </footer>
 
-    <!-- THREE.JS HOLOGRAM -->
+    <!-- THREE.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-      (function () {
-        const holoCanvas = document.getElementById("proj-holo-canvas");
-        const strip = document.getElementById("holo-strip");
 
+    <!-- Helper: builds a reusable hologram scene attached to a strip element -->
+    <script>
+      function makeHologram({
+        stripEl,
+        canvasEl,
+        stlPath,
+        nameEl,
+        vertsEl,
+        rotEl,
+        scale = 2.2,
+      }) {
         const renderer = new THREE.WebGLRenderer({
-          canvas: holoCanvas,
+          canvas: canvasEl,
           antialias: true,
           alpha: true,
         });
@@ -760,8 +837,8 @@
         });
 
         function onResize() {
-          const w = strip.clientWidth,
-            h = strip.clientHeight;
+          const w = stripEl.clientWidth,
+            h = stripEl.clientHeight;
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
@@ -769,93 +846,88 @@
         window.addEventListener("resize", onResize);
         onResize();
 
-        // ── STATE ──────────────────────────────────────────────────
-        let pivot = null;
-        let isDragging = false;
-        let lastX = 0,
-          lastY = 0;
-        let zoom = 4;
+        let pivot = null,
+          isDragging = false,
+          lastX = 0,
+          lastY = 0,
+          zoom = 4;
+        let autoSpin = true,
+          idleTimer = null,
+          isSnapping = false;
+        const IDLE_DELAY = 2500,
+          SNAP_SPEED = 0.06;
 
-        // Auto-spin / pause / snap-back
-        let autoSpin = true; // spinning?
-        let idleTimer = null; // timeout handle
-        let isSnapping = false; // currently snapping back?
-        const IDLE_DELAY = 2500; // ms after release before snap starts
-        const SNAP_SPEED = 0.06; // lerp factor per frame (0–1, higher = faster)
-
-        // Returns true if clientX is in the middle third of the strip
+        // Only intercept scroll when mouse is over THIS strip AND in its middle third
         function inMiddleThird(clientX) {
-          const rect = strip.getBoundingClientRect();
+          const rect = stripEl.getBoundingClientRect();
           const rel = (clientX - rect.left) / rect.width;
           return rel >= 0.333 && rel <= 0.667;
         }
 
-        // Called when the user stops interacting — start idle timer
+        // Is the mouse currently over the strip?
+        let mouseOverStrip = false;
+        stripEl.addEventListener("mouseenter", () => (mouseOverStrip = true));
+        stripEl.addEventListener("mouseleave", () => (mouseOverStrip = false));
+
         function startIdleTimer() {
           clearTimeout(idleTimer);
           idleTimer = setTimeout(() => {
-            isSnapping = true; // render loop will lerp back to origin
+            isSnapping = true;
           }, IDLE_DELAY);
         }
 
-        // ── MOUSE ──────────────────────────────────────────────────
-        strip.addEventListener("mousedown", (e) => {
+        stripEl.addEventListener("mousedown", (e) => {
           clearTimeout(idleTimer);
           isSnapping = false;
           autoSpin = false;
           isDragging = true;
           lastX = e.clientX;
           lastY = e.clientY;
-          strip.style.cursor = "grabbing";
+          stripEl.style.cursor = "grabbing";
         });
-
         window.addEventListener("mouseup", () => {
           if (!isDragging) return;
           isDragging = false;
-          strip.style.cursor = "grab";
+          stripEl.style.cursor = "grab";
           startIdleTimer();
         });
-
         window.addEventListener("mousemove", (e) => {
           if (!isDragging || !pivot) return;
           pivot.rotation.y += (e.clientX - lastX) * 0.008;
           pivot.rotation.x += (e.clientY - lastY) * 0.004;
           lastX = e.clientX;
           lastY = e.clientY;
-          const deg =
-            ((((pivot.rotation.y * 180) / Math.PI) % 360) + 360) % 360;
-          document.getElementById("holo-rot").textContent =
-            "rot " + Math.round(deg) + "°";
+          if (rotEl) {
+            const deg =
+              ((((pivot.rotation.y * 180) / Math.PI) % 360) + 360) % 360;
+            rotEl.textContent = "rot " + Math.round(deg) + "°";
+          }
+        });
+        stripEl.addEventListener("mousemove", (e) => {
+          if (!isDragging) stripEl.style.cursor = "grab";
         });
 
-        // Cursor hint
-        strip.addEventListener("mousemove", (e) => {
-          if (!isDragging) strip.style.cursor = "grab";
-        });
-
-        // ── SCROLL: only zoom when mouse is in middle third ────────
-        window.addEventListener(
+        // Scroll: only when mouse is over THIS strip AND in its middle third
+        stripEl.addEventListener(
           "wheel",
           (e) => {
-            if (!inMiddleThird(e.clientX)) return; // let page scroll normally
+            if (!inMiddleThird(e.clientX)) return; // outside middle — don't intercept
             e.preventDefault();
+            e.stopPropagation();
             zoom = Math.max(1.5, Math.min(9, zoom + e.deltaY * 0.004));
             camera.position.z = zoom;
           },
           { passive: false },
         );
 
-        // ── TOUCH ──────────────────────────────────────────────────
-        let lastTX = 0,
-          lastTY = 0;
-        strip.addEventListener("touchstart", (e) => {
+        let lastTX = 0;
+        stripEl.addEventListener("touchstart", (e) => {
           clearTimeout(idleTimer);
           isSnapping = false;
           autoSpin = false;
           lastTX = e.touches[0].clientX;
-          lastTY = e.touches[0].clientY;
         });
-        strip.addEventListener(
+        stripEl.addEventListener(
           "touchmove",
           (e) => {
             e.preventDefault();
@@ -865,9 +937,8 @@
           },
           { passive: false },
         );
-        strip.addEventListener("touchend", () => startIdleTimer());
+        stripEl.addEventListener("touchend", () => startIdleTimer());
 
-        // ── STL PARSERS ────────────────────────────────────────────
         function parseSTLBinary(buf) {
           const dv = new DataView(buf);
           const count = dv.getUint32(80, true);
@@ -916,37 +987,34 @@
 
           geo.center();
           geo.computeBoundingBox();
-          const size = new THREE.Vector3();
-          geo.boundingBox.getSize(size);
-          const scale = 2.2 / Math.max(size.x, size.y, size.z);
+          const sz = new THREE.Vector3();
+          geo.boundingBox.getSize(sz);
+          const s = scale / Math.max(sz.x, sz.y, sz.z);
 
           const mesh = new THREE.Mesh(geo, holoMat);
-          mesh.scale.setScalar(scale);
+          mesh.scale.setScalar(s);
           mesh.rotation.z = THREE.MathUtils.degToRad(-30);
 
           pivot = new THREE.Group();
           pivot.add(mesh);
           scene.add(pivot);
 
-          document.getElementById("holo-verts").textContent =
-            geo.attributes.position.count.toLocaleString() + " verts";
+          if (vertsEl)
+            vertsEl.textContent =
+              geo.attributes.position.count.toLocaleString() + " verts";
         }
 
-        // ── RENDER LOOP ────────────────────────────────────────────
         let t = 0;
         function animate() {
           requestAnimationFrame(animate);
           t += 0.016;
-
           if (pivot) {
             if (isSnapping) {
-              // Lerp X back to 0, keep Y spinning from wherever it landed
               pivot.rotation.x = THREE.MathUtils.lerp(
                 pivot.rotation.x,
                 0,
                 SNAP_SPEED,
               );
-              // Once X is close enough to 0, snap is done — resume auto-spin
               if (Math.abs(pivot.rotation.x) < 0.001) {
                 pivot.rotation.x = 0;
                 isSnapping = false;
@@ -955,31 +1023,50 @@
             } else if (autoSpin) {
               pivot.rotation.y += 0.004;
             }
-
-            const deg =
-              ((((pivot.rotation.y * 180) / Math.PI) % 360) + 360) % 360;
-            document.getElementById("holo-rot").textContent =
-              "rot " + Math.round(deg) + "°";
           }
-
           point1.intensity = 2.0 + Math.sin(t * 1.4) * 0.6;
           point2.intensity = 1.2 + Math.cos(t * 1.1) * 0.4;
           renderer.render(scene, camera);
         }
         animate();
 
-        fetch("../../STL/L1_Rocket.STL")
+        fetch(stlPath)
           .then((res) => {
             if (!res.ok) throw new Error("HTTP " + res.status);
             return res.arrayBuffer();
           })
-          .then((buf) => buildMesh(buf))
+          .then((buf) => {
+            buildMesh(buf);
+            if (nameEl) nameEl.textContent = stlPath.split("/").pop();
+          })
           .catch((err) => {
             console.error("STL load failed:", err);
-            document.getElementById("holo-name").textContent =
-              "⚠ model not found";
+            if (nameEl) nameEl.textContent = "⚠ not found";
           });
-      })();
+      }
+
+      // ── MAIN HOLOGRAM ──
+      makeHologram({
+        stripEl: document.getElementById("holo-strip"),
+        canvasEl: document.getElementById("proj-holo-canvas"),
+        stlPath: "../../STL/L1_Rocket.STL",
+        nameEl: document.getElementById("holo-name"),
+        vertsEl: document.getElementById("holo-verts"),
+        rotEl: document.getElementById("holo-rot"),
+        scale: 2.2,
+      });
+
+      // ── OUTCOME INLINE HOLOGRAM ──
+      // ▶ Replace the stlPath below with the fin jig STL when you have it
+      makeHologram({
+        stripEl: document.getElementById("outcome-holo"),
+        canvasEl: document.getElementById("outcome-holo-canvas"),
+        stlPath: "../../STL/Freshman Year/Sustainer Fin Jigs.STL",
+        nameEl: null,
+        vertsEl: null,
+        rotEl: null,
+        scale: 2.0,
+      });
     </script>
   </body>
 </html>
