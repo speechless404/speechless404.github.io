@@ -3,269 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ▶ CHANGE: update to match your project name -->
-    <title>Project Name — Mingyuan Chen</title>
+    <title>L1 Rocket — Mingyuan Chen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <!-- Path back to root style.css — adjust if this file is deeper than one folder -->
     <link rel="stylesheet" href="../../style.css" />
-    <style>
-      /* ── PROJECT PAGE EXTRAS ── */
-
-      /* Back link */
-      .back-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .back-link:hover {
-        color: var(--accent);
-      }
-
-      /* Hero: project title block */
-      .project-hero {
-        padding: 9rem 3rem 0;
-        max-width: 900px;
-      }
-      .project-hero .hero-eyebrow {
-        margin-bottom: 1rem;
-      }
-      .project-title-large {
-        font-size: clamp(2.4rem, 6vw, 5rem);
-        font-weight: 500;
-        line-height: 1.05;
-        letter-spacing: -0.025em;
-        margin-bottom: 1.5rem;
-      }
-      .project-subtitle {
-        font-size: 1.05rem;
-        color: var(--muted);
-        max-width: 560px;
-        line-height: 1.8;
-        margin-bottom: 2rem;
-      }
-
-      /* Meta pills row */
-      .project-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-bottom: 3rem;
-      }
-      .meta-pill {
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 0.35rem 0.8rem;
-        border-radius: 3px;
-        border: 1px solid var(--border);
-        color: var(--muted);
-      }
-      .meta-pill.accent {
-        border-color: rgba(124, 106, 245, 0.4);
-        color: var(--accent);
-      }
-
-      /* Hologram embed */
-      .hologram-wrap {
-        width: 100%;
-        aspect-ratio: 16/7;
-        border: 1px solid rgba(124, 106, 245, 0.2);
-        border-radius: 4px;
-        overflow: hidden;
-        margin: 0 0 5rem;
-      }
-      .hologram-wrap iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        display: block;
-      }
-
-      /* Content body */
-      .project-body {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 4rem;
-        align-items: start;
-        padding: 0 3rem 6rem;
-        max-width: 1100px;
-      }
-
-      /* Prose */
-      .project-prose h2 {
-        font-size: 1.4rem;
-        font-weight: 500;
-        letter-spacing: -0.015em;
-        margin: 2.5rem 0 1rem;
-      }
-      .project-prose h2:first-child {
-        margin-top: 0;
-      }
-      .project-prose p {
-        font-size: 0.95rem;
-        color: var(--muted);
-        line-height: 1.85;
-        margin-bottom: 1rem;
-      }
-      .project-prose ul {
-        padding-left: 1.2rem;
-        margin-bottom: 1rem;
-      }
-      .project-prose li {
-        font-size: 0.95rem;
-        color: var(--muted);
-        line-height: 1.8;
-        margin-bottom: 0.3rem;
-      }
-
-      /* Image gallery */
-      .project-gallery {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5px;
-        background: var(--border);
-        border: 1px solid var(--border);
-        margin: 2rem 0;
-      }
-      .gallery-img {
-        aspect-ratio: 4/3;
-        background: var(--surface);
-        overflow: hidden;
-      }
-      .gallery-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.4s ease;
-      }
-      .gallery-img:hover img {
-        transform: scale(1.04);
-      }
-      /* Placeholder for images not yet added */
-      .gallery-img.placeholder {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--mono);
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        color: var(--accent-dim);
-      }
-
-      /* Sidebar */
-      .project-sidebar {
-        position: sticky;
-        top: 6rem;
-      }
-
-      .sidebar-block {
-        border: 1px solid var(--border);
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        background: var(--surface);
-        border-radius: 4px;
-      }
-      .sidebar-label {
-        font-family: var(--mono);
-        font-size: 0.65rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 1rem;
-      }
-      .sidebar-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid var(--border);
-        font-size: 0.85rem;
-      }
-      .sidebar-row:last-child {
-        border-bottom: none;
-      }
-      .sidebar-row span:first-child {
-        font-family: var(--mono);
-        font-size: 0.7rem;
-        letter-spacing: 0.06em;
-        color: var(--muted);
-      }
-      .sidebar-row span:last-child {
-        color: var(--text);
-        font-size: 0.85rem;
-      }
-
-      .sidebar-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-      }
-      .sidebar-links .btn {
-        text-align: center;
-      }
-
-      /* Next/prev nav */
-      .project-nav {
-        display: flex;
-        justify-content: space-between;
-        padding: 2rem 3rem;
-        border-top: 1px solid var(--border);
-      }
-      .project-nav a {
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .project-nav a:hover {
-        color: var(--accent);
-      }
-
-      /* Responsive */
-      @media (max-width: 760px) {
-        .project-hero,
-        .project-body {
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
-        }
-        .project-body {
-          grid-template-columns: 1fr;
-        }
-        .project-sidebar {
-          position: static;
-        }
-        .hologram-wrap {
-          aspect-ratio: 4/3;
-        }
-        .project-gallery {
-          grid-template-columns: 1fr;
-        }
-        .project-nav {
-          flex-direction: column;
-          gap: 1rem;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../project-page.css" />
   </head>
   <body>
-    <!-- NAV (same as main site) -->
+    <!-- NAV -->
     <nav>
-      <span class="nav-logo">mingyuanchen</span>
+      <a href="../../index.html" class="nav-logo">mingyuanchen</a>
       <ul class="nav-links">
         <li><a href="../../index.html#projects">work</a></li>
         <li><a href="../../index.html#about">about</a></li>
@@ -277,149 +28,631 @@
     <!-- ── HERO ── -->
     <div class="project-hero">
       <a href="../../index.html#projects" class="back-link">← home</a>
-
       <div style="height: 2rem"></div>
-
-      <!-- ▶ CHANGE: update tag, title, and subtitle -->
       <p class="hero-eyebrow">engineering</p>
-      <h1 class="project-title-large">
-        Terrapin Rockets<br />Two-Stage Vehicle
-      </h1>
+      <h1 class="project-title-large">L1 Rocket</h1>
       <p class="project-subtitle">
-        A one-sentence hook that makes someone want to keep reading. What's the
-        most interesting thing about this project?
+        My Level 1 certification rocket and the test platform for UMD's
+        two-stage subteam — designed, built, and flown to earn my high-power
+        rocketry certification.
       </p>
-
-      <!-- ▶ CHANGE: update pills to match your project's details -->
       <div class="project-meta">
         <span class="meta-pill accent">engineering</span>
         <span class="meta-pill">UMD Terrapin Rockets</span>
-        <span class="meta-pill">2024 – present</span>
-        <span class="meta-pill">Fusion 360</span>
-        <span class="meta-pill">ANSYS</span>
+        <span class="meta-pill">Two-Stage Subteam</span>
+        <span class="meta-pill">2025 – present</span>
       </div>
     </div>
 
-    <!-- ── HOLOGRAM ── -->
-    <!-- ▶ CHANGE: update src to point to the right hologram file for this project -->
-    <!-- If you have multiple projects with different STLs, make a copy of hologram.html
-       for each one (e.g. hologram-rocket.html, hologram-airbrake.html) and change
-       the MODEL_PATH inside each copy. Then update the src below. -->
-    <!-- To remove the hologram entirely, delete this whole section -->
-    <div style="padding: 0 3rem">
-      <div class="hologram-wrap">
-        <iframe src="../hologram.html" title="3D model viewer"></iframe>
-      </div>
+    <!-- ── MAIN HOLOGRAM ── -->
+    <div class="holo-strip" id="holo-strip">
+      <div class="holo-bracket tl"></div>
+      <div class="holo-bracket tr"></div>
+      <div class="holo-bracket bl"></div>
+      <div class="holo-bracket br"></div>
+      <div class="holo-hud tl" id="holo-name">OTV.STL</div>
+      <div class="holo-hud tr">hologram · v1</div>
+      <div class="holo-hud bl" id="holo-verts"></div>
+      <div class="holo-hud br" id="holo-rot">rot 0°</div>
+      <canvas id="proj-holo-canvas" class="holo-canvas"></canvas>
+      <div class="holo-hint">drag to rotate · scroll to zoom</div>
     </div>
 
-    <!-- ── BODY ── -->
-    <div class="project-body">
-      <!-- LEFT: prose + images -->
+    <!-- ── MAIN LAYOUT ── -->
+    <div class="project-layout">
       <div class="project-prose">
-        <h2>Overview</h2>
-        <p>
-          Write 2–3 sentences explaining the project at a high level. What is
-          it, what does it do, and why does it exist? Assume the reader has no
-          context.
-        </p>
-
-        <h2>My Role</h2>
-        <p>
-          Describe specifically what you contributed. Avoid vague language like
-          "I helped with" — instead say "I designed the fin geometry in Fusion
-          360 and ran stress simulations in ANSYS to validate the load cases."
-        </p>
-
-        <h2>Technical Details</h2>
-        <p>
-          This is where you can go deeper. Talk about the engineering decisions,
-          tradeoffs you made, problems you hit, and how you solved them. Use
-          bullet points if you're listing specs:
-        </p>
-        <ul>
-          <li>Apogee target: X ft AGL</li>
-          <li>Airframe material: fiberglass / carbon fiber</li>
-          <li>Motor class: L / M</li>
-          <li>Recovery: dual-deploy with electronic deployment</li>
-        </ul>
-
-        <h2>Gallery</h2>
-        <!-- ▶ CHANGE: replace placeholder divs with real images.
-           Pattern: <img src="../../assets/images/project-name/photo.jpg" alt="description"> -->
-        <div class="project-gallery">
-          <div class="gallery-img placeholder">[ image 1 ]</div>
-          <div class="gallery-img placeholder">[ image 2 ]</div>
-          <div class="gallery-img placeholder">[ image 3 ]</div>
-          <div class="gallery-img placeholder">[ image 4 ]</div>
+        <!-- Overview -->
+        <div class="content-block">
+          <div class="content-text">
+            <h2>Overview &amp; Role</h2>
+            <p>
+              Originally tasked with creating a two-stage L1 rocket, I had to
+              pivot to making a one-stage rocket first. Below you will find my
+              work in simulation, CAD design, and manufacturing, as well as the
+              iterations I went through to reach my final product.
+            </p>
+            <p>This was my personal club project so all work was done by me.</p>
+            <p>
+              Links to the files I created in this project can be found at the
+              bottom of this page.
+            </p>
+          </div>
+          <div class="visual-slot placeholder-box">[ image ]</div>
         </div>
 
-        <h2>Outcome</h2>
-        <p>
-          What happened? Did the rocket fly? What did you learn? Any future work
-          planned? Close the loop so the reader leaves with a sense of
-          resolution.
-        </p>
+        <!-- Simulation -->
+        <div class="content-block flip">
+          <div class="content-text">
+            <h2>Simulation</h2>
+            <p>
+              I used OpenRocket to create the initial design for my two-stage
+              rocket, then took the sustainer of that design and redesigned it
+              as a dual-deploy L1 rocket.
+            </p>
+            <p>
+              The image shows my final sustainer design — also my L1 rocket. The
+              design satisfies constraints on length, width, and stability.
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/Openrocket L1 Sim.png"
+              alt="OpenRocket simulation"
+            />
+            <div class="visual-caption">
+              OpenRocket simulation — final sustainer / L1 design.
+            </div>
+          </div>
+        </div>
+
+        <!-- CAD Design -->
+        <div class="content-block">
+          <div class="content-text">
+            <h2>CAD Design</h2>
+            <p>
+              I modelled all manufactured parts in SOLIDWORKS and assembled them
+              alongside COTS parts (rail buttons, hardware, electronics) to
+              produce a full rocket model. A BOM was created to estimate costs.
+            </p>
+            <p>
+              The most iterated component was the Electronics Bay (E-Bay). All
+              iterations are shown below.
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/BOM.png"
+              alt="Bill of Materials"
+            />
+            <div class="visual-caption">
+              Bill of Materials used to estimate project cost.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay V1 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
+              alt="E-Bay V1 CAD"
+            />
+            <div class="visual-caption">
+              V1 — designed to sit in the nose cone. The main concern was
+              whether the threads could hold everything in place on descent.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
+              alt="E-Bay V1 Printed"
+            />
+            <div class="visual-caption">
+              V1 printed. Threading held well, so the next step was fitting all
+              electronics inside.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay V2 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
+              alt="E-Bay V2 CAD"
+            />
+            <div class="visual-caption">
+              V2 — houses all electronics: LiPo battery, screw switch, Blue
+              Raven altimeter, Featherweight GPS, and a backup altimeter.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
+              alt="E-Bay V2 Exploded"
+            />
+            <div class="visual-caption">
+              V2 exploded view including all screws and COTS components.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay V3/V4 -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
+              alt="E-Bay V3 CAD"
+            />
+            <div class="visual-caption">
+              V3 — voltage calculations were wrong; needed 3 batteries and 3
+              screw switches. Space became too cramped.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
+              alt="E-Bay V4 CAD"
+            />
+            <div class="visual-caption">
+              V4 — switched to a standard dual-deploy E-Bay housing for slightly
+              more working space.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay Final -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
+              alt="E-Bay Final CAD"
+            />
+            <div class="visual-caption">
+              Final design — more compact, better battery layout. Removed backup
+              altimeter, reducing to two batteries and two screw switches.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
+              alt="E-Bay Final Exploded"
+            />
+            <div class="visual-caption">
+              Final exploded view with all COTS components.
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Bay Final cont. -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
+              alt="E-Bay Final View"
+            />
+            <div class="visual-caption">
+              Additional view of the final E-Bay design.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
+              alt="E-Bay Final Printed"
+            />
+            <div class="visual-caption">
+              Final design printed and test fitted.
+            </div>
+          </div>
+        </div>
+
+        <!-- Outcome + inline hologram -->
+        <div class="content-block flip">
+          <div class="content-text">
+            <h2>Outcome</h2>
+            <p>
+              I laser-cut and 3D-printed the remaining components of my rocket
+              (including the fin drying supports) and it is awaiting final
+              construction and launch.
+            </p>
+          </div>
+          <div class="inline-holo" id="outcome-holo">
+            <canvas id="outcome-holo-canvas"></canvas>
+          </div>
+        </div>
       </div>
 
-      <!-- RIGHT: sidebar -->
+      <!-- Sidebar -->
       <aside class="project-sidebar">
-        <!-- Quick facts -->
         <div class="sidebar-block">
           <p class="sidebar-label">project info</p>
-          <!-- ▶ CHANGE: update each row -->
           <div class="sidebar-row">
-            <span>type</span>
-            <span>Engineering</span>
+            <span>type</span><span>Engineering</span>
           </div>
           <div class="sidebar-row">
-            <span>team</span>
-            <span>Terrapin Rockets</span>
+            <span>team</span><span>Terrapin Rockets</span>
           </div>
           <div class="sidebar-row">
-            <span>year</span>
-            <span>2024</span>
+            <span>subteam</span><span>Two-Stage</span>
           </div>
+          <div class="sidebar-row"><span>start</span><span>Oct 2025</span></div>
           <div class="sidebar-row">
-            <span>status</span>
-            <span>In progress</span>
-          </div>
-          <div class="sidebar-row">
-            <span>tools</span>
-            <span>Fusion 360, ANSYS</span>
+            <span>status</span><span>In progress</span>
           </div>
         </div>
-
-        <!-- Links -->
         <div class="sidebar-block">
-          <p class="sidebar-label">links</p>
-          <div class="sidebar-links">
-            <!-- ▶ CHANGE: add/remove buttons as needed. Delete any that don't apply. -->
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >github repo</a
-            >
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >report / paper</a
-            >
-            <a href="#" class="btn btn-ghost btn-sm" target="_blank"
-              >club website</a
-            >
-          </div>
+          <p class="sidebar-label">tools</p>
+          <span class="tools-item">SOLIDWORKS</span>
+          <span class="tools-item">OpenRocket</span>
+          <span class="tools-item">Laser Cutter</span>
+          <span class="tools-item">3D Printing</span>
         </div>
       </aside>
     </div>
 
-    <!-- ── PREV / NEXT ── -->
-    <!-- ▶ CHANGE: update hrefs to adjacent project pages -->
-    <div class="project-nav">
-      <a href="#">← previous project</a>
-      <a href="../../index.html#projects">all projects</a>
-      <a href="#">next project →</a>
+    <!-- Links -->
+    <div style="padding: 3rem; border-top: 1px solid var(--border)">
+      <p class="section-label">links</p>
+      <div
+        style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem"
+      >
+        <a
+          href="../../Other Files/Freshman/Revision 1 1H Sim.ork"
+          class="btn btn-ghost"
+          target="_blank"
+          >OpenRocket File</a
+        >
+        <a
+          href="../../Other Files/Freshman/1H Manufacturing.zip"
+          class="btn btn-ghost"
+          target="_blank"
+          >CAD Files</a
+        >
+      </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- Prev / Next -->
+    <div class="project-nav">
+      <a href="../../index.html#projects">home</a>
+      <a href="Seed_Planting_OTV.html">next project →</a>
+    </div>
+
+    <!-- Footer -->
     <footer>
       <span>© 2026 Mingyuan Chen</span>
       <span>built with github pages</span>
     </footer>
+
+    <!-- ── LIGHTBOX ── -->
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightbox-close">✕ close</button>
+        <img id="lightbox-img" src="" alt="" />
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+      </div>
+    </div>
+
+    <!-- ── SCRIPTS ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // ── LIGHTBOX ──────────────────────────────────────────────────
+      (function () {
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lightbox-img");
+        const lbCap = document.getElementById("lightbox-caption");
+        const lbClose = document.getElementById("lightbox-close");
+
+        function open(src, alt, caption) {
+          lbImg.src = src;
+          lbImg.alt = alt;
+          lbCap.textContent = caption || "";
+          lb.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+        function close() {
+          lb.classList.remove("open");
+          document.body.style.overflow = "";
+          lbImg.src = "";
+        }
+
+        // Attach click to every .visual-slot img
+        document.querySelectorAll(".visual-slot img").forEach((img) => {
+          img.addEventListener("click", () => {
+            const caption =
+              img
+                .closest(".visual-slot")
+                ?.querySelector(".visual-caption")
+                ?.textContent?.trim() || "";
+            open(img.src, img.alt, caption);
+          });
+        });
+
+        lbClose.addEventListener("click", close);
+        // Click backdrop to close
+        lb.addEventListener("click", (e) => {
+          if (e.target === lb) close();
+        });
+        // Escape key to close
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") close();
+        });
+      })();
+
+      // ── HOLOGRAM HELPER ───────────────────────────────────────────
+      function makeHologram({
+        stripEl,
+        canvasEl,
+        stlPath,
+        nameEl,
+        vertsEl,
+        rotEl,
+        scale = 2.2,
+      }) {
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvasEl,
+          antialias: true,
+          alpha: true,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x000000, 0);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+        camera.position.set(0, 0, 4);
+
+        scene.add(new THREE.AmbientLight(0x4433ff, 0.5));
+        const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
+        point1.position.set(3, 3, 3);
+        scene.add(point1);
+        const point2 = new THREE.PointLight(0x4fa8e8, 1.5, 20);
+        point2.position.set(-3, -2, 2);
+        scene.add(point2);
+
+        const grid = new THREE.GridHelper(6, 24, 0x2a2060, 0x1a1440);
+        grid.position.y = -1.4;
+        scene.add(grid);
+
+        const starGeo = new THREE.BufferGeometry();
+        const starArr = new Float32Array(900);
+        for (let i = 0; i < 900; i++) starArr[i] = (Math.random() - 0.5) * 18;
+        starGeo.setAttribute("position", new THREE.BufferAttribute(starArr, 3));
+        scene.add(
+          new THREE.Points(
+            starGeo,
+            new THREE.PointsMaterial({
+              color: 0x5544cc,
+              size: 0.02,
+              transparent: true,
+              opacity: 0.45,
+            }),
+          ),
+        );
+
+        const holoMat = new THREE.MeshPhongMaterial({
+          color: 0x7c6af5,
+          emissive: 0x3a2fa0,
+          specular: 0xffffff,
+          shininess: 80,
+          transparent: true,
+          opacity: 0.82,
+          side: THREE.DoubleSide,
+        });
+
+        function onResize() {
+          const w = stripEl.clientWidth,
+            h = stripEl.clientHeight;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
+        window.addEventListener("resize", onResize);
+        onResize();
+
+        let pivot = null,
+          isDragging = false,
+          lastX = 0,
+          lastY = 0,
+          zoom = 4;
+        let autoSpin = true,
+          idleTimer = null,
+          isSnapping = false;
+        const IDLE_DELAY = 2500,
+          SNAP_SPEED = 0.06;
+
+        function inMiddleThird(clientX) {
+          const rect = stripEl.getBoundingClientRect();
+          const rel = (clientX - rect.left) / rect.width;
+          return rel >= 0.333 && rel <= 0.667;
+        }
+
+        function startIdleTimer() {
+          clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => {
+            isSnapping = true;
+          }, IDLE_DELAY);
+        }
+
+        stripEl.addEventListener("mousedown", (e) => {
+          clearTimeout(idleTimer);
+          isSnapping = false;
+          autoSpin = false;
+          isDragging = true;
+          lastX = e.clientX;
+          lastY = e.clientY;
+          stripEl.style.cursor = "grabbing";
+        });
+        window.addEventListener("mouseup", () => {
+          if (!isDragging) return;
+          isDragging = false;
+          stripEl.style.cursor = "grab";
+          startIdleTimer();
+        });
+        window.addEventListener("mousemove", (e) => {
+          if (!isDragging || !pivot) return;
+          pivot.rotation.y += (e.clientX - lastX) * 0.008;
+          pivot.rotation.x += (e.clientY - lastY) * 0.004;
+          lastX = e.clientX;
+          lastY = e.clientY;
+          if (rotEl) {
+            const deg =
+              ((((pivot.rotation.y * 180) / Math.PI) % 360) + 360) % 360;
+            rotEl.textContent = "rot " + Math.round(deg) + "°";
+          }
+        });
+        stripEl.addEventListener("mousemove", (e) => {
+          if (!isDragging) stripEl.style.cursor = "grab";
+        });
+
+        stripEl.addEventListener(
+          "wheel",
+          (e) => {
+            if (!inMiddleThird(e.clientX)) return;
+            e.preventDefault();
+            e.stopPropagation();
+            zoom = Math.max(1.5, Math.min(9, zoom + e.deltaY * 0.004));
+            camera.position.z = zoom;
+          },
+          { passive: false },
+        );
+
+        let lastTX = 0;
+        stripEl.addEventListener("touchstart", (e) => {
+          clearTimeout(idleTimer);
+          isSnapping = false;
+          autoSpin = false;
+          lastTX = e.touches[0].clientX;
+        });
+        stripEl.addEventListener(
+          "touchmove",
+          (e) => {
+            e.preventDefault();
+            if (!pivot) return;
+            pivot.rotation.y += (e.touches[0].clientX - lastTX) * 0.01;
+            lastTX = e.touches[0].clientX;
+          },
+          { passive: false },
+        );
+        stripEl.addEventListener("touchend", () => startIdleTimer());
+
+        function parseSTLBinary(buf) {
+          const dv = new DataView(buf),
+            count = dv.getUint32(80, true);
+          const pos = new Float32Array(count * 9);
+          let off = 84,
+            pi = 0;
+          for (let i = 0; i < count; i++) {
+            off += 12;
+            for (let v = 0; v < 3; v++) {
+              pos[pi++] = dv.getFloat32(off, true);
+              pos[pi++] = dv.getFloat32(off + 4, true);
+              pos[pi++] = dv.getFloat32(off + 8, true);
+              off += 12;
+            }
+            off += 2;
+          }
+          const geo = new THREE.BufferGeometry();
+          geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+          geo.computeVertexNormals();
+          return geo;
+        }
+
+        function parseSTLASCII(text) {
+          const verts = [],
+            re = /vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g;
+          let m;
+          while ((m = re.exec(text)) !== null)
+            verts.push(parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]));
+          const geo = new THREE.BufferGeometry();
+          geo.setAttribute(
+            "position",
+            new THREE.BufferAttribute(new Float32Array(verts), 3),
+          );
+          geo.computeVertexNormals();
+          return geo;
+        }
+
+        function buildMesh(buf) {
+          const peek = new TextDecoder().decode(buf.slice(0, 5));
+          const dv = new DataView(buf);
+          const geo =
+            peek === "solid" &&
+            dv.getUint32(80, true) * 50 + 84 !== buf.byteLength
+              ? parseSTLASCII(new TextDecoder().decode(buf))
+              : parseSTLBinary(buf);
+          geo.center();
+          geo.computeBoundingBox();
+          const sz = new THREE.Vector3();
+          geo.boundingBox.getSize(sz);
+          const mesh = new THREE.Mesh(geo, holoMat);
+          mesh.scale.setScalar(scale / Math.max(sz.x, sz.y, sz.z));
+          mesh.rotation.z = THREE.MathUtils.degToRad(-30);
+          pivot = new THREE.Group();
+          pivot.add(mesh);
+          scene.add(pivot);
+          if (vertsEl)
+            vertsEl.textContent =
+              geo.attributes.position.count.toLocaleString() + " verts";
+        }
+
+        let t = 0;
+        (function animate() {
+          requestAnimationFrame(animate);
+          t += 0.016;
+          if (pivot) {
+            if (isSnapping) {
+              pivot.rotation.x = THREE.MathUtils.lerp(
+                pivot.rotation.x,
+                0,
+                SNAP_SPEED,
+              );
+              if (Math.abs(pivot.rotation.x) < 0.001) {
+                pivot.rotation.x = 0;
+                isSnapping = false;
+                autoSpin = true;
+              }
+            } else if (autoSpin) {
+              pivot.rotation.y += 0.004;
+            }
+          }
+          point1.intensity = 2.0 + Math.sin(t * 1.4) * 0.6;
+          point2.intensity = 1.2 + Math.cos(t * 1.1) * 0.4;
+          renderer.render(scene, camera);
+        })();
+
+        fetch(stlPath)
+          .then((r) => {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.arrayBuffer();
+          })
+          .then((buf) => {
+            buildMesh(buf);
+            if (nameEl) nameEl.textContent = stlPath.split("/").pop();
+          })
+          .catch((err) => {
+            console.error("STL load failed:", err);
+            if (nameEl) nameEl.textContent = "⚠ not found";
+          });
+      }
+
+      makeHologram({
+        stripEl: document.getElementById("holo-strip"),
+        canvasEl: document.getElementById("proj-holo-canvas"),
+        stlPath: "../../STL/Freshman Year/OTV.STL",
+        nameEl: document.getElementById("holo-name"),
+        vertsEl: document.getElementById("holo-verts"),
+        rotEl: document.getElementById("holo-rot"),
+        scale: 2.2,
+      });
+
+      makeHologram({
+        stripEl: document.getElementById("outcome-holo"),
+        canvasEl: document.getElementById("outcome-holo-canvas"),
+        stlPath: "../../STL/Freshman Year/Sustainer Fin Jigs.STL",
+        nameEl: null,
+        vertsEl: null,
+        rotEl: null,
+        scale: 2.0,
+      });
+    </script>
   </body>
 </html>
