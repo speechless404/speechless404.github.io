@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L1 Rocket — Mingyuan Chen</title>
+    <title>Seed Planting OTV — Mingyuan Chen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,17 +30,15 @@
       <a href="../../index.html#projects" class="back-link">← home</a>
       <div style="height: 2rem"></div>
       <p class="hero-eyebrow">engineering</p>
-      <h1 class="project-title-large">L1 Rocket</h1>
+      <h1 class="project-title-large">Seed Planting OTV</h1>
       <p class="project-subtitle">
-        My Level 1 certification rocket and the test platform for UMD's
-        two-stage subteam — designed, built, and flown to earn my high-power
-        rocketry certification.
+        An autonomous off terrain vehicle (OTV) to navigate obstacles, plant a
+        seed, and retrieve a soil sample.
       </p>
       <div class="project-meta">
         <span class="meta-pill accent">engineering</span>
-        <span class="meta-pill">UMD Terrapin Rockets</span>
-        <span class="meta-pill">Two-Stage Subteam</span>
-        <span class="meta-pill">2025 – present</span>
+        <span class="meta-pill">ENES100</span>
+        <span class="meta-pill">2025-2026</span>
       </div>
     </div>
 
@@ -66,198 +64,160 @@
           <div class="content-text">
             <h2>Overview &amp; Role</h2>
             <p>
-              Originally tasked with creating a two-stage L1 rocket, I had to
-              pivot to making a one-stage rocket first. Below you will find my
-              work in simulation, CAD design, and manufacturing, as well as the
-              iterations I went through to reach my final product.
+              My first self designed and manufactured project at UMD. The goal
+              was to create an OTV capable of navigating to a "planting zone,"
+              deploying a seed, securing a soil sample, and returning to the
+              starting point.
             </p>
-            <p>This was my personal club project so all work was done by me.</p>
+            <p>
+              This was a team project and my role was to help design and
+              construct the otv along with handle the manufacturing of all
+              custom parts.
+            </p>
             <p>
               Links to the files I created in this project can be found at the
               bottom of this page.
             </p>
           </div>
-          <div class="visual-slot placeholder-box">[ image ]</div>
-        </div>
-
-        <!-- Simulation -->
-        <div class="content-block flip">
-          <div class="content-text">
-            <h2>Simulation</h2>
-            <p>
-              I used OpenRocket to create the initial design for my two-stage
-              rocket, then took the sustainer of that design and redesigned it
-              as a dual-deploy L1 rocket.
-            </p>
-            <p>
-              The image shows my final sustainer design — also my L1 rocket. The
-              design satisfies constraints on length, width, and stability.
-            </p>
-          </div>
           <div class="visual-slot">
             <img
-              src="../../images/engineering/L1 Rocket/Openrocket L1 Sim.png"
-              alt="OpenRocket simulation"
+              src="../../images/engineering/OTV/Final OTV Colored.png"
+              alt="Final OTV design"
             />
             <div class="visual-caption">
-              OpenRocket simulation — final sustainer / L1 design.
+              Final OTV design — fully assembled and tested.
             </div>
           </div>
         </div>
 
-        <!-- CAD Design -->
+        <!-- Sensor Mount -->
+        <div class="content-block flip">
+          <div class="content-text">
+            <h2>Sensor Mount</h2>
+            <p>
+              One of the things I was responsible for designing was the sensor
+              mount. In our V1, we designed to have 2, one in front of each
+              wheel, hense the slightly crooked design.
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Sensor M V1.png"
+              alt="Sensor Mount V1"
+            />
+          </div>
+        </div>
+
+        <!-- Sensors Cont -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Sensor M V1 Printed.jpg"
+              alt="Sensor Mount V1 Printed"
+            />
+            <div class="visual-caption">
+              V1 — Printed and test fitted design.
+            </div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Sensor M V2.png"
+              alt="Sensor Mount V2 CAD"
+            />
+            <div class="visual-caption">
+              V2 — improved design with better sensor placement and integration.
+            </div>
+          </div>
+        </div>
+
+        <!-- Timing Belt Pully -->
         <div class="content-block">
           <div class="content-text">
-            <h2>CAD Design</h2>
+            <h2>Timing Belt Pully System</h2>
             <p>
-              I modelled all manufactured parts in SOLIDWORKS and assembled them
-              alongside COTS parts (rail buttons, hardware, electronics) to
-              produce a full rocket model. A BOM was created to estimate costs.
+              One of my teammates wanted to do a timing belt pully system for
+              the drive train with 4 wheel drive. We worked together to design
+              the pullys and gear ratios. I then printed the unique shapes out
+              of PLA, lasercut the flat drivetrain peices, and printed the
+              timing belt out of TPU.
             </p>
             <p>
-              The most iterated component was the Electronics Bay (E-Bay). All
-              iterations are shown below.
+              After a few iterations, we got it to work. The picture shows our
+              final design of the timing belt pully system.
             </p>
           </div>
           <div class="visual-slot">
             <img
-              src="../../images/engineering/L1 Rocket/BOM.png"
-              alt="Bill of Materials"
+              src="../../images/engineering/OTV/Timing Belt Pully System.png"
+              alt="Timing Belt Pully System"
             />
             <div class="visual-caption">
-              Bill of Materials used to estimate project cost.
+              Final design of the timing belt pully system.
             </div>
           </div>
         </div>
 
-        <!-- E-Bay V1 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
-              alt="E-Bay V1 CAD"
-            />
-            <div class="visual-caption">
-              V1 — designed to sit in the nose cone. The main concern was
-              whether the threads could hold everything in place on descent.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
-              alt="E-Bay V1 Printed"
-            />
-            <div class="visual-caption">
-              V1 printed. Threading held well, so the next step was fitting all
-              electronics inside.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay V2 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
-              alt="E-Bay V2 CAD"
-            />
-            <div class="visual-caption">
-              V2 — houses all electronics: LiPo battery, screw switch, Blue
-              Raven altimeter, Featherweight GPS, and a backup altimeter.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
-              alt="E-Bay V2 Exploded"
-            />
-            <div class="visual-caption">
-              V2 exploded view including all screws and COTS components.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay V3/V4 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
-              alt="E-Bay V3 CAD"
-            />
-            <div class="visual-caption">
-              V3 — voltage calculations were wrong; needed 3 batteries and 3
-              screw switches. Space became too cramped.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
-              alt="E-Bay V4 CAD"
-            />
-            <div class="visual-caption">
-              V4 — switched to a standard dual-deploy E-Bay housing for slightly
-              more working space.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay Final -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
-              alt="E-Bay Final CAD"
-            />
-            <div class="visual-caption">
-              Final design — more compact, better battery layout. Removed backup
-              altimeter, reducing to two batteries and two screw switches.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
-              alt="E-Bay Final Exploded"
-            />
-            <div class="visual-caption">
-              Final exploded view with all COTS components.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay Final cont. -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
-              alt="E-Bay Final View"
-            />
-            <div class="visual-caption">
-              Additional view of the final E-Bay design.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
-              alt="E-Bay Final Printed"
-            />
-            <div class="visual-caption">
-              Final design printed and test fitted.
-            </div>
-          </div>
-        </div>
-
-        <!-- Outcome + inline hologram -->
+        <!-- Arm -->
         <div class="content-block flip">
           <div class="content-text">
-            <h2>Outcome</h2>
+            <h2>Arm</h2>
             <p>
-              I laser-cut and 3D-printed the remaining components of my rocket
-              (including the fin drying supports) and it is awaiting final
-              construction and launch.
+              I also made the arm that would collect the soil sample. We tested
+              a bunch of designs and found that tape actually worked best for
+              the soil we needed to collect. So based off that, I made a design
+              that could maximize surface area of the tape.
+            </p>
+            <p>
+              After a few iterations of length, spring width, and tape
+              thickness, I got a design that could reliably collect soil.
             </p>
           </div>
           <div class="inline-holo" id="outcome-holo">
             <canvas id="outcome-holo-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Putting Things Together -->
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Final OTV.png"
+              alt="Final OTV Design"
+            />
+            <div class="visual-caption">Our final OTV design.</div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Putting Things Together.png"
+              alt="Putting Things Together"
+            />
+            <div class="visual-caption">Us putting the OTV together.</div>
+          </div>
+        </div>
+
+        <!-- conclusion -->
+        <div class="content-block flip">
+          <div class="content-text">
+            <h2>Conclusion</h2>
+            <p>
+              Our OTV ended up not working as expected due to navigation issues
+              which disallowed us to complete the individual tasks. In testing,
+              our OTV could complete each task individually but when we put
+              everything together, the navigation issues caused us to fail the
+              overall mission.
+            </p>
+            <p>
+              Next time it seems like we need to ensure everything gets finished
+              earlier so that there is more time to connect the dots. Or we
+              could create a simple solution first then change things after we
+              know ce can connect the parts.
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/OTV/Real OTV.png"
+              alt="Real OTV"
+            />
           </div>
         </div>
       </div>
@@ -269,46 +229,18 @@
           <div class="sidebar-row">
             <span>type</span><span>Engineering</span>
           </div>
-          <div class="sidebar-row">
-            <span>team</span><span>Terrapin Rockets</span>
-          </div>
-          <div class="sidebar-row">
-            <span>subteam</span><span>Two-Stage</span>
-          </div>
           <div class="sidebar-row"><span>start</span><span>Oct 2025</span></div>
           <div class="sidebar-row">
-            <span>status</span><span>In progress</span>
+            <span>status</span><span>Complete</span>
           </div>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">tools</p>
-          <span class="tools-item">SOLIDWORKS</span>
-          <span class="tools-item">OpenRocket</span>
+          <span class="tools-item">Onshape</span>
           <span class="tools-item">Laser Cutter</span>
           <span class="tools-item">3D Printing</span>
         </div>
       </aside>
-    </div>
-
-    <!-- Links -->
-    <div style="padding: 3rem; border-top: 1px solid var(--border)">
-      <p class="section-label">links</p>
-      <div
-        style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem"
-      >
-        <a
-          href="../../Other Files/Freshman/Revision 1 1H Sim.ork"
-          class="btn btn-ghost"
-          target="_blank"
-          >OpenRocket File</a
-        >
-        <a
-          href="../../Other Files/Freshman/1H Manufacturing.zip"
-          class="btn btn-ghost"
-          target="_blank"
-          >CAD Files</a
-        >
-      </div>
     </div>
 
     <!-- Prev / Next -->
@@ -647,7 +579,7 @@
       makeHologram({
         stripEl: document.getElementById("outcome-holo"),
         canvasEl: document.getElementById("outcome-holo-canvas"),
-        stlPath: "../../STL/Freshman Year/Sustainer Fin Jigs.STL",
+        stlPath: "../../STL/Freshman Year/Tape Base.STL",
         nameEl: null,
         vertsEl: null,
         rotEl: null,
