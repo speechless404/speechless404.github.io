@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L1 Rocket — Mingyuan Chen</title>
+    <title>Wooden Truss — Mingyuan Chen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -64,198 +64,133 @@
           <div class="content-text">
             <h2>Overview &amp; Role</h2>
             <p>
-              Originally tasked with creating a two-stage L1 rocket, I had to
-              pivot to making a one-stage rocket first. Below you will find my
-              work in simulation, CAD design, and manufacturing, as well as the
-              iterations I went through to reach my final product.
-            </p>
-            <p>This was my personal club project so all work was done by me.</p>
-            <p>
-              Links to the files I created in this project can be found at the
-              bottom of this page.
-            </p>
-          </div>
-          <div class="visual-slot placeholder-box">[ image ]</div>
-        </div>
-
-        <!-- Simulation -->
-        <div class="content-block flip">
-          <div class="content-text">
-            <h2>Simulation</h2>
-            <p>
-              I used OpenRocket to create the initial design for my two-stage
-              rocket, then took the sustainer of that design and redesigned it
-              as a dual-deploy L1 rocket.
+              The culmination of the Mechanics I course, this project tasked us
+              with using the formulas we had learned to calculate forces and
+              stresses in various truss designs, then applying those
+              calculations and our general engineering.
             </p>
             <p>
-              The image shows my final sustainer design — also my L1 rocket. The
-              design satisfies constraints on length, width, and stability.
+              This was a team project and everyone worked together on the mass
+              majority of the project. In particular, I took lead in assembling
+              the truss but worked less on the CAD.
             </p>
           </div>
           <div class="visual-slot">
             <img
-              src="../../images/engineering/L1 Rocket/Openrocket L1 Sim.png"
-              alt="OpenRocket simulation"
+              src="../../images/engineering/Truss/FEA.png"
+              alt="FEA Results"
             />
             <div class="visual-caption">
-              OpenRocket simulation — final sustainer / L1 design.
+              Example finite element analysis results for the truss under the
+              applied load.
             </div>
           </div>
         </div>
 
-        <!-- CAD Design -->
+        <!-- Calcs -->
+        <div class="content-block flip">
+          <div class="content-text">
+            <h2>Calculations</h2>
+            <p>
+              We took into account material properties, force distribution, and
+              size constraints among other things to design a truss that could
+              withstand the required load.
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/Truss/Calcs.png"
+              alt="Calculations"
+            />
+            <div class="visual-caption">
+              Example calculations for the forces on each member of the truss
+              under the applied load.
+            </div>
+          </div>
+        </div>
+
+        <!-- FEA -->
         <div class="content-block">
           <div class="content-text">
-            <h2>CAD Design</h2>
+            <h2>Finite Element Analysis</h2>
             <p>
-              I modelled all manufactured parts in SOLIDWORKS and assembled them
-              alongside COTS parts (rail buttons, hardware, electronics) to
-              produce a full rocket model. A BOM was created to estimate costs.
-            </p>
-            <p>
-              The most iterated component was the Electronics Bay (E-Bay). All
-              iterations are shown below.
+              We CADDed up our design and ran finite element analysis to verify
+              that the calculations we made were indeed correct.
             </p>
           </div>
           <div class="visual-slot">
             <img
-              src="../../images/engineering/L1 Rocket/BOM.png"
-              alt="Bill of Materials"
+              src="../../images/engineering/Truss/FEA.png"
+              alt="FEA Results"
             />
             <div class="visual-caption">
-              Bill of Materials used to estimate project cost.
+              Finite element analysis results for the truss under the applied
+              load.
             </div>
           </div>
         </div>
 
-        <!-- E-Bay V1 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1.png"
-              alt="E-Bay V1 CAD"
-            />
-            <div class="visual-caption">
-              V1 — designed to sit in the nose cone. The main concern was
-              whether the threads could hold everything in place on descent.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V1 Printed.jpg"
-              alt="E-Bay V1 Printed"
-            />
-            <div class="visual-caption">
-              V1 printed. Threading held well, so the next step was fitting all
-              electronics inside.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay V2 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2.png"
-              alt="E-Bay V2 CAD"
-            />
-            <div class="visual-caption">
-              V2 — houses all electronics: LiPo battery, screw switch, Blue
-              Raven altimeter, Featherweight GPS, and a backup altimeter.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V2 EXP.png"
-              alt="E-Bay V2 Exploded"
-            />
-            <div class="visual-caption">
-              V2 exploded view including all screws and COTS components.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay V3/V4 -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V3.png"
-              alt="E-Bay V3 CAD"
-            />
-            <div class="visual-caption">
-              V3 — voltage calculations were wrong; needed 3 batteries and 3
-              screw switches. Space became too cramped.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay V4.png"
-              alt="E-Bay V4 CAD"
-            />
-            <div class="visual-caption">
-              V4 — switched to a standard dual-deploy E-Bay housing for slightly
-              more working space.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay Final -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final 2.png"
-              alt="E-Bay Final CAD"
-            />
-            <div class="visual-caption">
-              Final design — more compact, better battery layout. Removed backup
-              altimeter, reducing to two batteries and two screw switches.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final EXP.png"
-              alt="E-Bay Final Exploded"
-            />
-            <div class="visual-caption">
-              Final exploded view with all COTS components.
-            </div>
-          </div>
-        </div>
-
-        <!-- E-Bay Final cont. -->
-        <div class="image-pair">
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/E-Bay Final.png"
-              alt="E-Bay Final View"
-            />
-            <div class="visual-caption">
-              Additional view of the final E-Bay design.
-            </div>
-          </div>
-          <div class="visual-slot">
-            <img
-              src="../../images/engineering/L1 Rocket/Final E-bay Printed.jpg"
-              alt="E-Bay Final Printed"
-            />
-            <div class="visual-caption">
-              Final design printed and test fitted.
-            </div>
-          </div>
-        </div>
-
-        <!-- Outcome + inline hologram -->
-        <div class="content-block flip">
+        <!-- Construction -->
+        <div class="content-block">
           <div class="content-text">
-            <h2>Outcome</h2>
+            <h2>Construction</h2>
             <p>
-              I laser-cut and 3D-printed the remaining components of my rocket
-              (including the fin drying supports) and it is awaiting final
-              construction and launch.
+              We used the vertical band saw to cut the wooden members to size,
+              then assembled the truss using wood glue, lasercut gusset plates,
+              and clamps. We had to be careful to ensure that the angles were
+              correct and that everything was held firmly in place while the
+              glue dried.
             </p>
           </div>
-          <div class="inline-holo" id="outcome-holo">
-            <canvas id="outcome-holo-canvas"></canvas>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/Truss/Lasercut.png"
+              alt="Lasercut Gusset Plates"
+            />
+            <div class="visual-caption">
+              The file we used to cut the gusset plates on the laser cutter.
+            </div>
+          </div>
+        </div>
+
+        <!-- Testing -->
+        <div class="content-block">
+          <div class="content-text">
+            <h2>Testing</h2>
+            <p>
+              We tested the truss by applying an increasing load to it and
+              measuring the deflection. We reached failure earlier than expected
+              due to gusset plate failure, a failure mode that we had not
+              accounted for (it was outside the scope of the class).
+            </p>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/Truss/Failure Chart.png"
+              alt="Failure Chart"
+            />
+            <div class="visual-caption">
+              The file we used to cut the gusset plates on the laser cutter.
+            </div>
+          </div>
+        </div>
+
+        <div class="image-pair">
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/Truss/Failure.png"
+              alt="Failure Image"
+            />
+            <div class="visual-caption">View of the gusset plate failure.</div>
+          </div>
+          <div class="visual-slot">
+            <img
+              src="../../images/engineering/Truss/Failure 2.png"
+              alt="Failure Image"
+            />
+            <div class="visual-caption">
+              View of the gusset plate failure from a different angle.
+            </div>
           </div>
         </div>
       </div>
@@ -267,46 +202,19 @@
           <div class="sidebar-row">
             <span>type</span><span>Engineering</span>
           </div>
-          <div class="sidebar-row">
-            <span>team</span><span>Terrapin Rockets</span>
-          </div>
-          <div class="sidebar-row">
-            <span>subteam</span><span>Two-Stage</span>
-          </div>
           <div class="sidebar-row"><span>start</span><span>Oct 2025</span></div>
           <div class="sidebar-row">
-            <span>status</span><span>In progress</span>
+            <span>status</span><span>Complete</span>
           </div>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">tools</p>
           <span class="tools-item">SOLIDWORKS</span>
-          <span class="tools-item">OpenRocket</span>
+          <span class="tools-item">Vertical Band Saw</span>
           <span class="tools-item">Laser Cutter</span>
-          <span class="tools-item">3D Printing</span>
+          <span class="tools-item">Basic Woodworking</span>
         </div>
       </aside>
-    </div>
-
-    <!-- Links -->
-    <div style="padding: 3rem; border-top: 1px solid var(--border)">
-      <p class="section-label">links</p>
-      <div
-        style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem"
-      >
-        <a
-          href="../../Other Files/Freshman/Revision 1 1H Sim.ork"
-          class="btn btn-ghost"
-          target="_blank"
-          >OpenRocket File</a
-        >
-        <a
-          href="../../Other Files/Freshman/1H Manufacturing.zip"
-          class="btn btn-ghost"
-          target="_blank"
-          >CAD Files</a
-        >
-      </div>
     </div>
 
     <!-- Prev / Next -->
@@ -583,7 +491,7 @@
           geo.boundingBox.getSize(sz);
           const mesh = new THREE.Mesh(geo, holoMat);
           mesh.scale.setScalar(scale / Math.max(sz.x, sz.y, sz.z));
-          mesh.rotation.z = THREE.MathUtils.degToRad(-30);
+          mesh.rotation.z = THREE.MathUtils.degToRad(10);
           pivot = new THREE.Group();
           pivot.add(mesh);
           scene.add(pivot);
