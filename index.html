@@ -120,13 +120,10 @@
       <h2 class="section-title">Projects</h2>
 
       <div class="project-grid">
-        <!-- ▶ For each card: set data-img to the path of your thumbnail image.
-             If you don't have one yet, leave data-img="" and a placeholder shows. -->
-
         <a
           href="Project Pages/Engineering/L1_Rocket.html"
           class="project-card"
-          data-img="images/projects/l1-rocket.jpg"
+          data-img="images/projects/L1 Thumbnail.png"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -143,7 +140,7 @@
         <a
           href="Project Pages/Engineering/Seed_Planting_OTV.html"
           class="project-card"
-          data-img="images/projects/otv.jpg"
+          data-img="images/projects/OTV Thumbnail.png"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -160,7 +157,7 @@
         <a
           href="Project Pages/Engineering/Limit_Switch_Holder.html"
           class="project-card"
-          data-img="images/projects/lsh.jpg"
+          data-img="images/projects/LSH Thumbnail.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -177,7 +174,7 @@
         <a
           href="Project Pages/Engineering/Wooden_Truss.html"
           class="project-card"
-          data-img="images/projects/truss.jpg"
+          data-img="images/projects/Truss Thumbnail.png"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -193,7 +190,7 @@
         <a
           href="Project Pages/Engineering/Suspension_System.html"
           class="project-card"
-          data-img="images/projects/suspension.jpg"
+          data-img="images/projects/Damper Thumbnail.png"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -207,23 +204,23 @@
         </a>
 
         <a
-          href="Project Pages/Coding/Coding_Project1.html"
+          href="Project Pages/Coding/Coding Project1.html"
           class="project-card"
-          data-img=""
+          data-img="images/projects/Coding Thumbnail.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
             <p class="project-tag">code</p>
             <h3 class="project-title">Coding Project</h3>
-            <p class="project-desc">Placeholder for a coding project.</p>
+            <p class="project-desc">Upcoming coding project.</p>
             <span class="project-arrow">view project →</span>
           </div>
         </a>
 
         <a
-          href="Project Pages/Art/Elysian_Visions.html"
+          href="Project Pages/Art/Elysian Visions.html"
           class="project-card"
-          data-img="images/projects/elysian.jpg"
+          data-img="images/projects/Art Thumbnail.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -461,8 +458,8 @@
           side: THREE.DoubleSide,
         });
         function onResize() {
-          const w = hero.clientWidth;
-          const h = holoCanvas.clientHeight || hero.clientHeight;
+          const w = hero.clientWidth,
+            h = hero.clientHeight;
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
