@@ -65,7 +65,6 @@
     <section id="about">
       <p class="section-label">about me</p>
       <h2 class="section-title">Background</h2>
-
       <div class="about-grid">
         <div class="photo-wrap">
           <div class="photo-glow" id="photo-glow"></div>
@@ -76,7 +75,6 @@
             crossorigin="anonymous"
           />
         </div>
-
         <div class="about-text">
           <p>Hi! I go by Francois.</p>
           <p>
@@ -122,87 +120,124 @@
       <h2 class="section-title">Projects</h2>
 
       <div class="project-grid">
-        <a href="Project Pages/Engineering/L1_Rocket.html" class="project-card">
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">L1 Rocket</h3>
-          <p class="project-desc">
-            My L1 Certification rocket and the testing rocket for UMD's
-            two-stage subteam of the terrapin rocket team.
-          </p>
-          <span class="project-arrow">view project →</span>
+        <!-- ▶ For each card: set data-img to the path of your thumbnail image.
+             If you don't have one yet, leave data-img="" and a placeholder shows. -->
+
+        <a
+          href="Project Pages/Engineering/L1_Rocket.html"
+          class="project-card"
+          data-img="images/projects/l1-rocket.jpg"
+        >
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">L1 Rocket</h3>
+            <p class="project-desc">
+              My L1 Certification rocket and the testing rocket for UMD's
+              two-stage subteam of the terrapin rocket team.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Seed_Planting_OTV.html"
           class="project-card"
+          data-img="images/projects/otv.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Seed Planting OTV</h3>
-          <p class="project-desc">
-            An autonomous rover to navigate obstacles while completing a seed
-            planting task.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Seed Planting OTV</h3>
+            <p class="project-desc">
+              An autonomous rover to navigate obstacles while completing a seed
+              planting task.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Limit_Switch_Holder.html"
           class="project-card"
+          data-img="images/projects/lsh.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Limit Switch Holder</h3>
-          <p class="project-desc">
-            The bottom limit switch holder in the airbrake of our 2026 Spaceport
-            America Cup competition rocket.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Limit Switch Holder</h3>
+            <p class="project-desc">
+              The bottom limit switch holder in the airbrake of our 2026
+              Spaceport America Cup competition rocket.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Wooden_Truss.html"
           class="project-card"
+          data-img="images/projects/truss.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Wooden Truss</h3>
-          <p class="project-desc">
-            A wooden truss to withstand a 1000 pound force load.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Wooden Truss</h3>
+            <p class="project-desc">
+              A wooden truss to withstand a 1000 pound force load.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Suspension_System.html"
           class="project-card"
+          data-img="images/projects/suspension.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Suspension System</h3>
-          <p class="project-desc">
-            A 3D model of a simplified car suspension system.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Suspension System</h3>
+            <p class="project-desc">
+              A 3D model of a simplified car suspension system.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
-          href="Project Pages/Coding/Coding_Project1.html"
+          href="Project Pages/Coding/Coding Project1.html"
           class="project-card"
+          data-img=""
         >
-          <p class="project-tag">code</p>
-          <h3 class="project-title">Coding Project</h3>
-          <p class="project-desc">Placeholder for a coding project.</p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">code</p>
+            <h3 class="project-title">Coding Project</h3>
+            <p class="project-desc">Upcoming coding project.</p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
-        <a href="Project Pages/Art/Elysian_Visions.html" class="project-card">
-          <p class="project-tag">art</p>
-          <h3 class="project-title">Elysian Visions</h3>
-          <p class="project-desc">
-            Painting and artworks across a variety of mediums and styles. My
-            High School Art Portfolio.
-          </p>
-          <span class="project-arrow">view project →</span>
+        <a
+          href="Project Pages/Art/Elysian Visions.html"
+          class="project-card"
+          data-img="images/projects/elysian.jpg"
+        >
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">art</p>
+            <h3 class="project-title">Elysian Visions</h3>
+            <p class="project-desc">
+              Painting and artworks across a variety of mediums and styles. My
+              High School Art Portfolio.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
-        <!-- SLOT 8: always the "more projects" card -->
+        <!-- SLOT 8: more projects -->
         <a href="all-projects.html" class="project-card project-card--more">
           <div class="more-projects-inner">
             <span class="more-projects-icon">⊕</span>
@@ -217,11 +252,9 @@
     <section id="certs">
       <p class="section-label">recognition</p>
       <h2 class="section-title">Certifications &amp; Awards</h2>
-
       <div class="certs-grid">
         <div class="certs-column">
           <h3 class="certs-column-title">Certifications</h3>
-
           <div class="cert-item">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
@@ -239,7 +272,6 @@
               >
             </div>
           </div>
-
           <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
@@ -247,7 +279,6 @@
               <p class="cert-meta">— · —</p>
             </div>
           </div>
-
           <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--cert">✦</div>
             <div class="cert-body">
@@ -256,10 +287,8 @@
             </div>
           </div>
         </div>
-
         <div class="certs-column">
           <h3 class="certs-column-title">Awards &amp; Honors</h3>
-
           <div class="cert-item">
             <div class="cert-icon cert-icon--award">◆</div>
             <div class="cert-body">
@@ -268,7 +297,6 @@
               <p class="cert-desc">Semester Academic Honors</p>
             </div>
           </div>
-
           <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--award">◆</div>
             <div class="cert-body">
@@ -276,7 +304,6 @@
               <p class="cert-meta">— · —</p>
             </div>
           </div>
-
           <div class="cert-item cert-item--ghost">
             <div class="cert-icon cert-icon--award">◆</div>
             <div class="cert-body">
@@ -335,12 +362,23 @@
       drawGrain();
     </script>
 
-    <!-- PHOTO GLOW: auto-samples dominant colors from the photo -->
+    <!-- PROJECT CARD THUMBNAILS: set background-image from data-img -->
+    <script>
+      document.querySelectorAll(".project-card[data-img]").forEach((card) => {
+        const src = card.getAttribute("data-img");
+        const thumb = card.querySelector(".project-thumb");
+        if (src) {
+          thumb.style.backgroundImage = `url('${src}')`;
+          thumb.classList.add("has-image");
+        }
+      });
+    </script>
+
+    <!-- PHOTO GLOW -->
     <script>
       (function () {
         const img = document.getElementById("about-photo");
         const glow = document.getElementById("photo-glow");
-
         function applyGlow() {
           try {
             const off = document.createElement("canvas");
@@ -348,17 +386,14 @@
             off.height = 80;
             const c = off.getContext("2d");
             c.drawImage(img, 0, 0, 80, 80);
-
-            // Two buckets: midtones (subject) and highlights (background/skin)
             let r1 = 0,
               g1 = 0,
               b1 = 0,
-              n1 = 0;
-            let r2 = 0,
+              n1 = 0,
+              r2 = 0,
               g2 = 0,
               b2 = 0,
               n2 = 0;
-
             for (let y = 0; y < 80; y += 2) {
               for (let x = 0; x < 80; x += 2) {
                 const px = c.getImageData(x, y, 1, 1).data;
@@ -376,27 +411,18 @@
                 }
               }
             }
-
             if (n1 === 0) return;
             const mr = Math.round(r1 / n1),
               mg = Math.round(g1 / n1),
               mb = Math.round(b1 / n1);
-            const hr = n2 > 0 ? Math.round(r2 / n2) : mr;
-            const hg = n2 > 0 ? Math.round(g2 / n2) : mg;
-            const hb = n2 > 0 ? Math.round(b2 / n2) : mb;
-
-            glow.style.background = `
-              radial-gradient(ellipse 130% 120% at 55% 45%,
-                rgba(${mr},${mg},${mb},0.55) 0%,
-                rgba(${hr},${hg},${hb},0.30) 40%,
-                rgba(${mr},${mg},${mb},0.12) 65%,
-                transparent 80%)
-            `;
+            const hr = n2 > 0 ? Math.round(r2 / n2) : mr,
+              hg = n2 > 0 ? Math.round(g2 / n2) : mg,
+              hb = n2 > 0 ? Math.round(b2 / n2) : mb;
+            glow.style.background = `radial-gradient(ellipse 130% 120% at 55% 45%, rgba(${mr},${mg},${mb},0.55) 0%, rgba(${hr},${hg},${hb},0.30) 40%, rgba(${mr},${mg},${mb},0.12) 65%, transparent 80%)`;
           } catch (e) {
-            console.warn("Photo glow: could not sample image colors.", e);
+            console.warn("Photo glow:", e);
           }
         }
-
         if (img.complete && img.naturalWidth > 0) applyGlow();
         else img.addEventListener("load", applyGlow);
       })();
@@ -408,7 +434,6 @@
       (function () {
         const holoCanvas = document.getElementById("holo-canvas");
         const hero = document.getElementById("home");
-
         const renderer = new THREE.WebGLRenderer({
           canvas: holoCanvas,
           antialias: true,
@@ -416,11 +441,9 @@
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setClearColor(0x000000, 0);
-
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
         camera.position.set(-1.6, 0, 4);
-
         scene.add(new THREE.AmbientLight(0x4433ff, 0.5));
         const point1 = new THREE.PointLight(0x7c6af5, 2.5, 20);
         point1.position.set(3, 3, 3);
@@ -428,7 +451,6 @@
         const point2 = new THREE.PointLight(0x4fa8e8, 1.5, 20);
         point2.position.set(-3, -2, 2);
         scene.add(point2);
-
         const holoMat = new THREE.MeshPhongMaterial({
           color: 0x7c6af5,
           emissive: 0x3a2fa0,
@@ -438,7 +460,6 @@
           opacity: 0.82,
           side: THREE.DoubleSide,
         });
-
         function onResize() {
           const w = hero.clientWidth,
             h = hero.clientHeight;
@@ -449,12 +470,10 @@
         }
         window.addEventListener("resize", onResize);
         onResize();
-
         function isOverRocket(clientX) {
           const rect = hero.getBoundingClientRect();
           return (clientX - rect.left) / rect.width > 0.55;
         }
-
         let isDragging = false,
           lastX = 0;
         holoCanvas.addEventListener("mousedown", (e) => {
@@ -478,7 +497,6 @@
               ? "grab"
               : "default";
         });
-
         let lastTX = 0;
         holoCanvas.addEventListener("touchstart", (e) => {
           if (!isOverRocket(e.touches[0].clientX)) return;
@@ -494,11 +512,10 @@
           },
           { passive: false },
         );
-
         function parseSTLBinary(buf) {
-          const dv = new DataView(buf);
-          const count = dv.getUint32(80, true);
-          const pos = new Float32Array(count * 9);
+          const dv = new DataView(buf),
+            count = dv.getUint32(80, true),
+            pos = new Float32Array(count * 9);
           let off = 84,
             pi = 0;
           for (let i = 0; i < count; i++) {
@@ -516,7 +533,6 @@
           geo.computeVertexNormals();
           return geo;
         }
-
         function parseSTLASCII(text) {
           const verts = [],
             re = /vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g;
@@ -531,33 +547,26 @@
           geo.computeVertexNormals();
           return geo;
         }
-
         let pivot = null;
-
         function buildMesh(buf) {
-          const peek = new TextDecoder().decode(buf.slice(0, 5));
-          const dv = new DataView(buf);
+          const peek = new TextDecoder().decode(buf.slice(0, 5)),
+            dv = new DataView(buf);
           const geo =
             peek === "solid" &&
             dv.getUint32(80, true) * 50 + 84 !== buf.byteLength
               ? parseSTLASCII(new TextDecoder().decode(buf))
               : parseSTLBinary(buf);
-
           geo.center();
           geo.computeBoundingBox();
           const size = new THREE.Vector3();
           geo.boundingBox.getSize(size);
-          const scale = 2.1 / Math.max(size.x, size.y, size.z);
-
           const mesh = new THREE.Mesh(geo, holoMat);
-          mesh.scale.setScalar(scale);
+          mesh.scale.setScalar(2.1 / Math.max(size.x, size.y, size.z));
           mesh.rotation.z = THREE.MathUtils.degToRad(-30);
-
           pivot = new THREE.Group();
           pivot.add(mesh);
           scene.add(pivot);
         }
-
         let t = 0;
         function animate() {
           requestAnimationFrame(animate);
@@ -568,11 +577,10 @@
           renderer.render(scene, camera);
         }
         animate();
-
         fetch("STL/L1_Rocket.STL")
-          .then((res) => {
-            if (!res.ok) throw new Error("HTTP " + res.status);
-            return res.arrayBuffer();
+          .then((r) => {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.arrayBuffer();
           })
           .then((buf) => buildMesh(buf))
           .catch((err) => console.error("STL load failed:", err));

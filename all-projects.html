@@ -11,11 +11,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/Project Pages/project-page.css" />
+
     <style>
       .all-hero {
         padding: 9rem 3rem 3rem;
       }
-
       .filter-bar {
         display: flex;
         gap: 0.6rem;
@@ -44,15 +45,12 @@
         color: var(--accent);
         background: rgba(124, 106, 245, 0.08);
       }
-
       .all-grid-wrap {
         padding: 0 3rem 6rem;
       }
-
       .project-card.hidden {
         display: none;
       }
-
       .back-link {
         font-family: var(--mono);
         font-size: 0.75rem;
@@ -64,7 +62,6 @@
       .back-link:hover {
         color: var(--accent);
       }
-
       @media (max-width: 680px) {
         .all-hero,
         .all-grid-wrap {
@@ -77,12 +74,12 @@
   <body>
     <!-- NAV -->
     <nav>
-      <span class="nav-logo">mingyuanchen</span>
+      <a href="../../index.html" class="nav-logo">mingyuanchen</a>
       <ul class="nav-links">
-        <li><a href="index.html#projects">work</a></li>
-        <li><a href="index.html#about">about</a></li>
-        <li><a href="index.html#certs">awards</a></li>
-        <li><a href="index.html#contact">contact</a></li>
+        <li><a href="../../index.html#projects">work</a></li>
+        <li><a href="../../index.html#about">about</a></li>
+        <li><a href="../../index.html#certs">awards</a></li>
+        <li><a href="../../index.html#contact">contact</a></li>
       </ul>
     </nav>
 
@@ -112,8 +109,6 @@
         Everything I've built, designed, and created — across engineering, code,
         and art.
       </p>
-
-      <!-- Filter buttons -->
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filter('all', this)">
           all
@@ -128,116 +123,145 @@
 
     <div class="all-grid-wrap">
       <div class="project-grid">
-        <!-- ── ENGINEERING ── -->
         <a
           href="Project Pages/Engineering/L1_Rocket.html"
           class="project-card"
           data-tag="engineering"
+          data-img="images/projects/l1-rocket.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">L1 Rocket</h3>
-          <p class="project-desc">
-            My L1 Certification rocket and the testing rocket for UMD's
-            two-stage subteam of the Terrapin Rocket team.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">L1 Rocket</h3>
+            <p class="project-desc">
+              My L1 Certification rocket and the testing rocket for UMD's
+              two-stage subteam of the Terrapin Rocket team.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Seed_Planting_OTV.html"
           class="project-card"
           data-tag="engineering"
+          data-img="images/projects/otv.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Seed Planting OTV</h3>
-          <p class="project-desc">
-            An autonomous rover to navigate obstacles while completing a seed
-            planting task.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Seed Planting OTV</h3>
+            <p class="project-desc">
+              An autonomous rover to navigate obstacles while completing a seed
+              planting task.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Limit_Switch_Holder.html"
           class="project-card"
           data-tag="engineering"
+          data-img="images/projects/lsh.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Limit Switch Holder</h3>
-          <p class="project-desc">
-            The bottom limit switch holder in the airbrake of our 2026 Spaceport
-            America Cup competition rocket.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Limit Switch Holder</h3>
+            <p class="project-desc">
+              The bottom limit switch holder in the airbrake of our 2026
+              Spaceport America Cup competition rocket.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Wooden_Truss.html"
           class="project-card"
           data-tag="engineering"
+          data-img="images/projects/truss.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Wooden Truss</h3>
-          <p class="project-desc">
-            A wooden truss designed to withstand a 1000 pound force load.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Wooden Truss</h3>
+            <p class="project-desc">
+              A wooden truss designed to withstand a 1000 pound force load.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/Suspension_System.html"
           class="project-card"
           data-tag="engineering"
+          data-img="images/projects/suspension.jpg"
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Suspension System</h3>
-          <p class="project-desc">
-            A 3D model of a simplified car suspension system.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Suspension System</h3>
+            <p class="project-desc">
+              A 3D model of a simplified car suspension system.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
         <a
           href="Project Pages/Engineering/miscellaneous.html"
           class="project-card"
           data-tag="engineering"
+          data-img=""
         >
-          <p class="project-tag">engineering</p>
-          <h3 class="project-title">Miscellaneous</h3>
-          <p class="project-desc">
-            A collection of little miscellaneous engineering projects.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">engineering</p>
+            <h3 class="project-title">Miscellaneous</h3>
+            <p class="project-desc">
+              A collection of little miscellaneous engineering projects.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
-        <!-- ── CODE ── -->
         <a
           href="Project Pages/Coding/Coding_Project1.html"
           class="project-card"
           data-tag="code"
+          data-img=""
         >
-          <p class="project-tag">code</p>
-          <h3 class="project-title">Coding Project</h3>
-          <p class="project-desc">Placeholder for a coding project.</p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">code</p>
+            <h3 class="project-title">Coding Project</h3>
+            <p class="project-desc">Placeholder for a coding project.</p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
-        <!-- ── ART ── -->
         <a
           href="Project Pages/Art/Elysian_Visions.html"
           class="project-card"
           data-tag="art"
+          data-img="images/projects/elysian.jpg"
         >
-          <p class="project-tag">art</p>
-          <h3 class="project-title">Elysian Visions</h3>
-          <p class="project-desc">
-            Painting and artworks across a variety of mediums and styles. My
-            High School Art Portfolio.
-          </p>
-          <span class="project-arrow">view project →</span>
+          <div class="project-thumb"></div>
+          <div class="project-card-body">
+            <p class="project-tag">art</p>
+            <h3 class="project-title">Elysian Visions</h3>
+            <p class="project-desc">
+              Painting and artworks across a variety of mediums and styles. My
+              High School Art Portfolio.
+            </p>
+            <span class="project-arrow">view project →</span>
+          </div>
         </a>
 
-        <!-- ▶ Add new projects here — copy a card block above and update the tag, title, desc, and href -->
+        <!-- ▶ Add new projects here -->
       </div>
     </div>
 
@@ -248,6 +272,16 @@
     </footer>
 
     <script>
+      // Set thumbnail backgrounds from data-img
+      document.querySelectorAll(".project-card[data-img]").forEach((card) => {
+        const src = card.getAttribute("data-img");
+        const thumb = card.querySelector(".project-thumb");
+        if (thumb && src) {
+          thumb.style.backgroundImage = `url('${src}')`;
+          thumb.classList.add("has-image");
+        }
+      });
+
       function filter(tag, btn) {
         document
           .querySelectorAll(".filter-btn")

@@ -274,21 +274,53 @@ a.project-card:visited {
   letter-spacing: 0.08em;
   color: var(--muted);
 }
+/* ── PROJECT GRID ── */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
 }
 
+/* Thumbnail card */
 .project-card {
   background: var(--surface);
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
   transition: background 0.2s;
   cursor: pointer;
+  overflow: hidden;
 }
 .project-card:hover { background: #16162a; }
+
+/* Thumbnail image area */
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #0d0d1a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+}
+/* No image: show a subtle grid pattern placeholder */
+.project-thumb:not(.has-image) {
+  background-image:
+    linear-gradient(rgba(124,106,245,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,106,245,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.project-card:hover .project-thumb { transform: scale(1.03); }
+
+/* Card body below the image */
+.project-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
 .project-tag {
   font-family: var(--mono);
@@ -296,28 +328,29 @@ a.project-card:visited {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-alt);
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .project-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 500;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
 
 .project-desc {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--muted);
   line-height: 1.7;
+  flex: 1;
 }
 
 .project-arrow {
   display: inline-block;
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--border);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.12);
   transition: color 0.2s;
 }
 .project-card:hover .project-arrow { color: var(--accent); }
