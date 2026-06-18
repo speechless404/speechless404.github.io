@@ -126,7 +126,7 @@
         <a
           href="Project Pages/Engineering/L1_Rocket.html"
           class="project-card"
-          data-img="images/projects/L1 Thumbnail.png"
+          data-img="images/projects/l1-rocket.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -143,7 +143,7 @@
         <a
           href="Project Pages/Engineering/Seed_Planting_OTV.html"
           class="project-card"
-          data-img="images/projects/OTV Thumbnail.png"
+          data-img="images/projects/otv.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -160,7 +160,7 @@
         <a
           href="Project Pages/Engineering/Limit_Switch_Holder.html"
           class="project-card"
-          data-img="images/projects/LSH Thumbnail.jpg"
+          data-img="images/projects/lsh.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -177,7 +177,7 @@
         <a
           href="Project Pages/Engineering/Wooden_Truss.html"
           class="project-card"
-          data-img="images/projects/Truss Thumbnail.png"
+          data-img="images/projects/truss.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -193,7 +193,7 @@
         <a
           href="Project Pages/Engineering/Suspension_System.html"
           class="project-card"
-          data-img="images/projects/Damper Thumbnail.png"
+          data-img="images/projects/suspension.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -207,23 +207,23 @@
         </a>
 
         <a
-          href="Project Pages/Coding/Coding Project1.html"
+          href="Project Pages/Coding/Coding_Project1.html"
           class="project-card"
-          data-img="images/projects/Coding Thumbnail.jpg"
+          data-img=""
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
             <p class="project-tag">code</p>
             <h3 class="project-title">Coding Project</h3>
-            <p class="project-desc">Upcoming coding project.</p>
+            <p class="project-desc">Placeholder for a coding project.</p>
             <span class="project-arrow">view project →</span>
           </div>
         </a>
 
         <a
-          href="Project Pages/Art/Elysian Visions.html"
+          href="Project Pages/Art/Elysian_Visions.html"
           class="project-card"
-          data-img="images/projects/Art Thumbnail.jpg"
+          data-img="images/projects/elysian.jpg"
         >
           <div class="project-thumb"></div>
           <div class="project-card-body">
@@ -461,8 +461,8 @@
           side: THREE.DoubleSide,
         });
         function onResize() {
-          const w = hero.clientWidth,
-            h = hero.clientHeight;
+          const w = hero.clientWidth;
+          const h = holoCanvas.clientHeight || hero.clientHeight;
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
